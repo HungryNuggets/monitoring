@@ -87,7 +87,7 @@ class Customer extends MappingTable {
         $name_customer = strip_tags(trim($name_customer));
         if (empty($name_customer)) {
             trigger_error("The customer name can't be empty", E_USER_NOTICE);
-        } elseif (strlen($name_customer) > 80) {
+        } elseif (strlen($name_customer) > 85) {
             trigger_error("The customer name can't be longer than 85 characters", E_USER_NOTICE);
         } else {
             $this->name_customer = $name_customer;
@@ -102,7 +102,7 @@ class Customer extends MappingTable {
         $domain_customer = strip_tags(trim($domain_customer));
         if (empty($domain_customer)) {
             trigger_error("The domain name can't be empty", E_USER_NOTICE);
-        } elseif (strlen($domain_customer) > 80) {
+        } elseif (strlen($domain_customer) > 140) {
             trigger_error("The domain name can't be longer than 140 characters", E_USER_NOTICE);
         } else {
             $this->domain_customer = $domain_customer;
@@ -117,7 +117,7 @@ class Customer extends MappingTable {
         $contact_person_customer = strip_tags(trim($contact_person_customer));
         if (empty($contact_person_customer)) {
             trigger_error("The name of the contact person can't be empty", E_USER_NOTICE);
-        } elseif (strlen($contact_person_customer) > 80) {
+        } elseif (strlen($contact_person_customer) > 100) {
             trigger_error("The name of the contact person can't be longer than 100 characters", E_USER_NOTICE);
         } else {
             $this->contact_person_customer = $contact_person_customer;
@@ -146,7 +146,7 @@ class Customer extends MappingTable {
         $phone_customer = strip_tags(trim($phone_customer));
         if (empty($phone_customer)) {
             trigger_error("The name of the contact person can't be empty", E_USER_NOTICE);
-        } elseif (strlen($phone_customer) > 40) {
+        } elseif (strlen($phone_customer) > 100) {
             trigger_error("The name of the contact person can't be longer than 100 characters", E_USER_NOTICE);
         } else {
             $this->phone_customer = $phone_customer;

@@ -10,9 +10,9 @@ class Issue extends MappingTable {
     protected int $id_issue;
     protected string $timestamp_issue;
     protected string $desc_issue;
-    protected string $status_issue;
-    protected string $admin_id_admin;
-    protected string $customer_id_customer;
+    protected int $status_issue;
+    protected int $admin_id_admin;
+    protected int $customer_id_customer;
 
     // GETTERS
 
@@ -103,7 +103,7 @@ class Issue extends MappingTable {
         $desc_issue = strip_tags(trim($desc_issue));
         if (empty($desc_issue)) {
             trigger_error("The description of the issue can't be empty", E_USER_NOTICE);
-        } elseif (strlen($desc_issue) > 80) {
+        } elseif (strlen($desc_issue) > 200) {
             trigger_error("The description of the issue can't be longer than 200 characters", E_USER_NOTICE);
         } else {
             $this->desc_issue = $desc_issue;
