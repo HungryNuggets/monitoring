@@ -28,3 +28,30 @@ spl_autoload_register(
 
 // SINGLETON DB CONNECTION
 $DB = MyPDO::getInstance(DB_TYPE . ":host=" . DB_HOST . ";dbname=" . DB_NAME . ";port=" . DB_PORT . ";charset=" . DB_CHARSET, DB_USER, DB_PASSWORD, ENV_DEV);
+
+// TWIG VIEWS
+$loader = new FilesystemLoader(ROOT . '/view');
+$twig = new Environment($loader, ['debug' => true]);
+$twig->addExtension(new DebugExtension());
+
+// SWIFTMAILER
+$transport = (new Swift_SmtpTransport(MAIL_SMTP, MAIL_PORT, MAIL_ENCRYPTION))
+    ->setUsername(MAIL_ADDRESS)
+    ->setPassword(MAIL_PWD)
+    ->setStreamOptions(array('ssl' => array(
+        'verify_peer' => false,
+        'verify_peer_name' => false,
+        'allow_self_signed' => true
+    )));
+
+// ON ADMIN CONNECTION
+if (isset($_SESSION['session_id']) && $_SESSION['session_id'] === session_id()) {
+
+    require ROOT.'/controller/admin.controller.php';
+
+// ON USER DEMAND
+} else {
+
+    require ROOT.'/controller/public.controller.php';
+
+}
