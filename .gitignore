@@ -1,1 +1,8 @@
+###> Infos and Vendor (check config.php.local if needed) ###
 /bin/config.php
+/vendor
+###> Infos and Vendor ###
+
+###> PHPStorm ###
+.idea
+###< PHPStorm ###

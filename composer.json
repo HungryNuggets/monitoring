@@ -1,0 +1,6 @@
+{
+    "require": {
+        "ovh/ovh": "^3.0",
+        "twig/twig": "^3.0"
+    }
+}
