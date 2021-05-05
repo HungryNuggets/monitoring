@@ -1,11 +1,10 @@
 <?php
 
 /**
- * Class AdminManager
- * Manager for the admin table
+ * Class CustomerManager
+ * Manager for the customer table
  */
-class CustomerManager extends ManagerTable
-{
+class CustomerManager extends ManagerTable {
 
     // CREATING NEW CUSTOMER
     public function newCustomer(Customer $customer): bool
