@@ -1,8 +1,13 @@
-###> Infos and Vendor (check config.php.local if needed) ###
+###> Infos, Tests and Vendor (check config.php.local if needed) ###
 /bin/config.php
 /vendor
-###> Infos and Vendor ###
+/test
+###> Infos, Tests and Vendor ###
 
 ###> PHPStorm ###
 .idea
-###< PHPStorm ###
+###> PHPStorm ###
+
+###> Workbench ###
+/data/db/db_monitoring.mwb.bak
+###> Workbench ###
