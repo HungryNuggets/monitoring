@@ -84,7 +84,7 @@ class Admin extends MappingTable {
         if (empty($id_admin)) {
             trigger_error("The admin ID can't be 0", E_USER_NOTICE);
         } else {
-            $this->$id_admin = $id_admin;
+            $this->id_admin = $id_admin;
         }
     }
 
