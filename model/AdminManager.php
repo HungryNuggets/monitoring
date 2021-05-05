@@ -10,7 +10,7 @@ class AdminManager extends ManagerTable {
     public function signUp(Admin $admin) : bool {
 
         // PASSWORD CRYPT
-        $cryptPassword = $this->passwordHash($admin->getPwdUser());
+        $cryptPassword = $this->passwordHash($admin->getPwdAdmin());
         // VALIDATION KEY
         $validationKey = $this->validationKey();
 
@@ -82,5 +82,138 @@ class AdminManager extends ManagerTable {
         session_destroy();
 
         return true;
+    }
+
+    // UPDATE ADMIN'S MAIN INFOS
+    function updateAdminInfos(Admin $admin) : bool {
+
+        $sql = "UPDATE admin SET nickname_admin= ?, mail_admin= ? WHERE id_admin= ?; ";
+        $prepare = $this->db->prepare($sql);
+
+        $prepare->bindValue(1, $admin->getNicknameAdmin(), PDO::PARAM_STR);
+        $prepare->bindValue(2, $admin->getMailAdmin(), PDO::PARAM_STR);
+        $prepare->bindValue(3, $admin->getIdAdmin(), PDO::PARAM_INT);
+
+        try {
+
+            $prepare->execute();
+
+            // IF OKAY
+            return true;
+
+        } catch (Exception $e) {
+
+            trigger_error($e->getMessage());
+
+            // IF NOT
+            return false;
+        }
+    }
+
+    // UPDATE ADMIN'S PASSWORD
+    function updateAdminPassword(Admin $admin) : bool {
+
+        // PASSWORD CRYPT
+        $cryptPassword = $this->passwordHash($admin->getPwdAdmin());
+
+        $sql = "UPDATE admin SET pwd_admin= ? WHERE id_admin= ?; ";
+        $prepare = $this->db->prepare($sql);
+
+        $prepare->bindValue(1, $cryptPassword, PDO::PARAM_STR);
+        $prepare->bindValue(2, $admin->getIdAdmin(), PDO::PARAM_INT);
+
+        try {
+
+            $prepare->execute();
+
+            // IF OKAY
+            return true;
+
+        } catch (Exception $e) {
+
+            trigger_error($e->getMessage());
+
+            // IF NOT
+            return false;
+        }
+    }
+
+    // UPDATE ADMIN'S STATUS
+    function updateAdminStatus(Admin $admin) : bool {
+
+        $sql = "UPDATE admin SET status_admin= ? WHERE id_admin= ?; ";
+        $prepare = $this->db->prepare($sql);
+
+        $prepare->bindValue(1, 1, PDO::PARAM_INT);
+        $prepare->bindValue(2, $admin->getIdAdmin(), PDO::PARAM_INT);
+
+        try {
+
+            $prepare->execute();
+
+            // IF OKAY
+            return true;
+
+        } catch (Exception $e) {
+
+            trigger_error($e->getMessage());
+
+            // IF NOT
+            return false;
+        }
+    }
+
+    // UPDATE ADMIN'S VALIDATION STATUS
+    function updateAdminValidationStatus(Admin $admin) : bool {
+
+        $sql = "UPDATE admin SET validation_status_admin= ? WHERE id_admin= ?; ";
+        $prepare = $this->db->prepare($sql);
+
+        $prepare->bindValue(1, 1, PDO::PARAM_INT);
+        $prepare->bindValue(2, $admin->getIdAdmin(), PDO::PARAM_INT);
+
+        try {
+
+            $prepare->execute();
+
+            // IF OKAY
+            return true;
+
+        } catch (Exception $e) {
+
+            trigger_error($e->getMessage());
+
+            // IF NOT
+            return false;
+        }
+    }
+
+    // READ ALL
+    public function selectAllAdmin() : array {
+
+        $sql = "SELECT * FROM admin WHERE status_admin = ?";
+        $prepare = $this->db->prepare($sql);
+
+        try {
+
+            $prepare->execute([1]);
+
+            // IF THERE IS AT LEAST ONE RESULT
+            if ($prepare->rowCount()) {
+
+                return $prepare->fetchAll(PDO::FETCH_ASSOC);
+
+                // IF NOT
+            } else {
+                return [];
+            }
+
+        } catch (Exception $e) {
+
+            trigger_error($e->getMessage());
+            // IF NOT
+            return [];
+
+        }
     }
 }
