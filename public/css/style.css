@@ -185,7 +185,6 @@ body {
 
 .main-container .overlay {
     background: #F4CA34;
-    background: linear-gradient(to right, #F4CA34, #E0B62A) no-repeat 0 0 / cover;
     color: #15182B;
     position: relative;
     left: -100%;

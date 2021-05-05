@@ -6,20 +6,26 @@
             <div class="form-container sign-up-container">
                 <form method="post">
                     <h1>Inscription</h1>
+                    {% if warningSignUp != "" %}
+                    <p> {{ warningSignUp }} </p>
+                    {% endif %}
                     <input type="text" name="nickname_admin" placeholder="Nickname">
                     <input type="email" name="mail_admin" placeholder="Email">
                     <input type="password" name="pwd_admin" placeholder="Password">
-                    <input type="password" name="password_verify" placeholder="Repeat your password">
+                    <input type="password" name="pwd_verify" placeholder="Repeat your password">
                     <button type="submit" name="signup">Go !</button>
                 </form>
             </div>
             <div class="form-container sign-in-container">
                 <form method="post">
                     <h1>Connexion</h1>
+                    {% if warningSignIn != "" %}
+                        <p> {{ warningSignIn }} </p>
+                    {% endif %}
                     <input type="text" name="nickname_admin" placeholder="Email">
                     <input type="password" name="pwd_admin" placeholder="Password">
                     <a href="#">Mot de passe oublié ?</a>
-                    <button type="submit" name="signup">Go !</button>
+                    <button type="submit" name="signin">Go !</button>
                 </form>
             </div>
             <div class="overlay-container">
