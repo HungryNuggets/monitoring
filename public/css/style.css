@@ -6,7 +6,7 @@
 }
 
 body {
-    background-color: #15182B;
+    background-color: #121421;
 }
 
 .main-img {
@@ -40,7 +40,7 @@ body {
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: #F4CA34;
+    background-color: #0E101D;
     color: white;
     text-align: center;
     font-weight: 500;
@@ -52,7 +52,7 @@ body {
 }
 
 .footer a {
-    color: #15182B;
+    color: #F4CA34;
 }
 
 .main-container {
@@ -62,8 +62,11 @@ body {
 }
 
 .main-container h1 {
-    font-weight: 500;
-    margin: 0;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    font-size: 1.8em;
 }
 
 .main-container p {
@@ -111,7 +114,8 @@ body {
     background: #eee;
     border: none;
     padding: 7px 8px;
-    margin: 8px 0;
+    margin: 4px 0;
+    color: #15182B;
     width: 100%;
 }
 
