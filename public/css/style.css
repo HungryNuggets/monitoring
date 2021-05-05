@@ -8,3 +8,49 @@
 body {
     background-color: #15182B;
 }
+
+.main-img {
+    height: 50px;
+    width: auto;
+    margin-right: 50px;
+}
+
+.background-dark {
+    background-color: #0E101D;
+}
+
+.yellow {
+    color: #F4CA34;
+}
+
+.nav-look {
+    color : white;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: .5rem;
+}
+
+.nav-look:hover {
+    color :#F4CA34;
+    text-decoration: none;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #F4CA34;
+    color: white;
+    text-align: center;
+    font-weight: 500;
+    padding: 10px;
+}
+
+.footer p {
+    margin-bottom: 0;
+}
+
+.footer a {
+    color: #15182B;
+}

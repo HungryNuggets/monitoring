@@ -9,29 +9,29 @@
 
 {% block body %}
     {% block header %}
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTW9jpgxsCep75Q_uBOtnTO9Y0a5F-3arK6mw&usqp=CAU" alt="Hungry Nuggets"></a>
+        <nav class="navbar navbar-expand-lg navbar-dark background-dark">
+            <a class="navbar-brand" href="https://hungrynuggets.com" target="_blank"><img class="main-img" src="img/logos/white-hungry-nuggets.png" alt="Hungry Nuggets"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav nav justify-content-end">
                     <li class="nav-item">
-                        <a class="nav-link" href="./"> Accueil  </a>
+                        <a class="nav-look" href="./"> Accueil  </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="?connection"> Connexion </a>
+                        <a class="nav-look" href="?connection"> Connexion </a>
                     </li>
                     {% if admin == "yes" %}
                         <li class="nav-item">
-                            <a class="nav-link" href="?customer"> Clients </a>
+                            <a class="nav-look" href="?customer"> Clients </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="?issue"> Historique </a>
+                            <a class="nav-look" href="?issue"> Historique </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="?admin"> Admin </a>
+                            <a class="nav-look" href="?admin"> Admin </a>
                         </li>
                     {% endif %}
                 </ul>
@@ -39,7 +39,11 @@
         </nav>
     {% endblock %}
     {% block content %}{% endblock %}
-    {% block footer %}{% endblock %}
+    {% block footer %}
+        <div class="footer">
+            <p>©2020 <a href="https://hungrynuggets.com">Hungry Nuggets</a>. All rights reserved.</p>
+        </div>
+    {% endblock %}
 {% endblock %}
 
 {% block javascripts %}
