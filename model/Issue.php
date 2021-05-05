@@ -129,7 +129,11 @@ class Issue extends MappingTable {
      */
     public function setAdminIdAdmin(int $admin_id_admin): void {
         $admin_id_admin = (int) $admin_id_admin;
-        $this->admin_id_admin = $admin_id_admin;
+        if ($admin_id_admin === 0){
+            trigger_error("The admin id can't be 0", E_USER_NOTICE);
+        } else {
+            $this->admin_id_admin = $admin_id_admin;
+        }
     }
 
     /**
