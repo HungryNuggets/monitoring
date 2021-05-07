@@ -55,8 +55,56 @@ class AdminManager extends ManagerTable {
     }
 
     // SIGN IN
+    public function signIn(Admin $admin) : bool {
+
+        $query = "SELECT * FROM admin WHERE nickname_admin = ? ;";
+        $req = $this->db->prepare($query);
+        $req->bindValue(1, $admin->getNicknameAdmin(), PDO::PARAM_STR);
+
+        try {
+            $req->execute();
+
+            // IF THERE IS A RESULT
+            if ($req->rowCount()) {
+                $connectedAdmin = $req->fetch(PDO::FETCH_ASSOC);
+                if ($this->verifyPassword($connectedAdmin['pwd_admin'], $admin->getPwdAdmin())) {
+                    $this->createSession($connectedAdmin);
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+
+    }
 
     // SIGN IN RIGHTS VERIFICATION
+    public function signInRightVerification(Admin $admin): string {
+        $sql = "SELECT nickname_admin, status_admin, validation_status_admin FROM admin WHERE nickname_admin = ? ;";
+        $req = $this->db->prepare($sql);
+        $req->bindValue(1,$admin->getNicknameAdmin(),PDO::PARAM_STR);
+        try{
+            $req->execute();
+            if($req->rowCount()){
+                $adminInfo = $req->fetch(PDO::FETCH_ASSOC);
+                if ($adminInfo['validation_status_admin'] == 2 ){
+                    return "Vous devez confirmer votre adresse e-mail avant de vous connecter";
+                } else if ($adminInfo['status_admin'] == 2){
+                    return "Un administrateur étudie votre demande, vous serez prévenu si votre compte est accepté";
+                } else {
+                    return "";
+                }
+            }else{
+                return "Something went wrong, please retry";
+            }
+        }catch (PDOException $e){
+            return $e->getMessage();
+        }
+    }
 
     // AUTOMATICALLY GENERATED KEY
     protected function validationKey(): string {
@@ -66,6 +114,19 @@ class AdminManager extends ManagerTable {
     // PASSWORD HASH
     protected function passwordHash(string $pwd): string {
         return password_hash($pwd, PASSWORD_DEFAULT);
+    }
+
+    // VERIFY PASSWORD
+    protected function verifyPassword(string $cryptPwd, string $pwd): bool {
+        return password_verify($pwd, $cryptPwd);
+    }
+
+    // SESSION
+    protected function createSession(array $datas): bool {
+        unset($datas['pwd_admin']);
+        $_SESSION = $datas;
+        $_SESSION['session_id'] = session_id();
+        return true;
     }
 
     // VERIFY EXISTENCE

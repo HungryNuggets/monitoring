@@ -6,6 +6,18 @@ $warningSignUp = "";
 // SIGN IN
 if (isset($_POST['signin'])) {
 
+    $adminInstance = new Admin($_POST);
+
+    $verifyRights = $adminManager->signInRightVerification($adminInstance);
+
+    if ($verifyRights === ''){
+        if($adminManager->signIn($adminInstance)) {
+            header("Location: ./");
+            exit();
+        }
+    } else {
+        $warningSignIn = $verifyRights;
+    }
 }
 
 
