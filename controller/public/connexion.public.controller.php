@@ -24,6 +24,57 @@ if (isset($_POST['signup'])) {
         // WARNING
         $warningSignUp = "Les deux mots de passe doivent être identiques.";
 
+    } else {
+
+        // CHECK IF THE NICKNAME OR EMAIL ARE ALREADY USED
+        $verifyExistence = $adminManager->verifyExistence($_POST['nickname_user'], $_POST['mail_user']);
+
+        // IF ALREADY USED
+        if ($verifyExistence >= 1){
+            // WARNING TO DISPLAY IN HOME_PAGE.HTML.TWIG
+            $warningSignUp = "Ce pseudo ou cette adresse e-mail sont déjà utilisé !";
+
+            // IF NOT USED
+        } else if ($verifyExistence === 0){
+
+            // NEW USER
+            $userInstance = new Admin($_POST);
+
+            // IF SIGN UP SUCCESSFUL
+            if ($adminManager->signUp($userInstance)){
+
+                // MAIL DATAS
+                $userMail = $adminManager->selectSignUp($_POST['mail_admin']);
+
+                // MAIL FOR CONFIRMATION
+                $mailSignUp = new Swift_Mailer($transport);
+                $messageSignUp = (new Swift_Message('Hungry Nuggets || Confirmer votre compte'))
+                    ->setFrom([MAIL_ADDRESS => 'Hungry Nuggets'])
+                    ->setTo([$_POST['mail_admin'] => $userMail['nickname_admin']]);
+
+                // IMAGES
+                $imageMain = $messageSignUp->embed(Swift_Image::fromPath('img/mails/entete-mail.jpg'));
+                $imageFooter = $messageSignUp->embed(Swift_Image::fromPath('img/mails/bottom-mail.jpg'));
+
+                // SET MAIL BODY
+                $messageSignUp->setBody(
+                    MailManager::mailVerification(["user"=>$userMail,"imgTop"=>$imageMain,"imgBottom"=>$imageFooter]),
+                    'text/html'
+                );
+
+                if ($mailSignUp->send($messageSignUp)){
+
+                    // WARNING
+                    $warningSignUp = "Hello ".$_POST['nickname_user']." ! Tu vas recevoir un mail :)";
+
+                } else {
+
+                    // WARNING
+                    $warningSignUp = "Désolé ".$_POST['nickname_user'].", mais nous avons eu un soucis";
+
+                }
+            }
+        }
     }
 }
 

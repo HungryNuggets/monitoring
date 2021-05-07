@@ -1,4 +1,4 @@
 <?php
 
 // TWIG RENDER
-echo $twig->render("home.html.twig",["admin"=>'no']);
+echo $twig->render("public/home.html.twig",["admin"=>'no']);

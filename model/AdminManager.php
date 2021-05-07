@@ -41,6 +41,19 @@ class AdminManager extends ManagerTable {
         }
     }
 
+    // SELECT DATAS FOR SIGN UP VERIFICATION
+    public function selectSignUp(string $mail) : array {
+        $sql = "SELECT nickname_admin, confirmation_key_admin FROM admin WHERE mail_admin = ? ;";
+        $request = $this->db->prepare($sql);
+        $request->execute([$mail]);
+        // IF OKAY
+        if ($request->rowCount()) {
+            return $request->fetch(PDO::FETCH_ASSOC);
+        }
+        // IF NOT
+        return [];
+    }
+
     // AUTOMATICALLY GENERATED KEY
     protected function validationKey(): string {
         return md5(microtime(TRUE) * 100000);

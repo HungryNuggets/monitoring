@@ -29,6 +29,9 @@ spl_autoload_register(
 // SINGLETON DB CONNECTION
 $DB = MyPDO::getInstance(DB_TYPE . ":host=" . DB_HOST . ";dbname=" . DB_NAME . ";port=" . DB_PORT . ";charset=" . DB_CHARSET, DB_USER, DB_PASSWORD, ENV_DEV);
 
+// MANAGERS
+$adminManager = new AdminManager($DB);
+
 // TWIG VIEWS
 $loader = new FilesystemLoader(ROOT . '/view');
 $twig = new Environment($loader, ['debug' => true]);
