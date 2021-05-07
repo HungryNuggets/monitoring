@@ -54,6 +54,10 @@ class AdminManager extends ManagerTable {
         return [];
     }
 
+    // SIGN IN
+
+    // SIGN IN RIGHTS VERIFICATION
+
     // AUTOMATICALLY GENERATED KEY
     protected function validationKey(): string {
         return md5(microtime(TRUE) * 100000);
@@ -77,6 +81,34 @@ class AdminManager extends ManagerTable {
         $prepare->execute();
 
         return $prepare->rowCount();
+    }
+
+    // SELECT VALIDATED ADMIN
+    public function selectValidatedAdmins(): array {
+        $sql = "SELECT mail_admin FROM admin WHERE status_admin = ? AND validation_status_admin = ? ;";
+        $prepare = $this->db->prepare($sql);
+
+        try {
+
+            $prepare->execute([1,1]);
+
+            // IF THERE IS AT LEAST ONE RESULT
+            if ($prepare->rowCount()) {
+
+                return $prepare->fetchAll(PDO::FETCH_ASSOC);
+
+                // IF NOT
+            } else {
+                return [];
+            }
+
+        } catch (Exception $e) {
+
+            trigger_error($e->getMessage());
+            // IF NOT
+            return [];
+
+        }
     }
 
     // DISCONNECTION
@@ -177,13 +209,14 @@ class AdminManager extends ManagerTable {
     }
 
     // UPDATE ADMIN'S VALIDATION STATUS
-    function updateAdminValidationStatus(Admin $admin) : bool {
+    function updateAdminValidationStatus(string $admin, string $key) : bool {
 
-        $sql = "UPDATE admin SET validation_status_admin= ? WHERE id_admin= ?; ";
+        $sql = "UPDATE admin SET validation_status_admin= ? WHERE nickname_admin= ? AND confirmation_key_admin = ?; ";
         $prepare = $this->db->prepare($sql);
 
         $prepare->bindValue(1, 1, PDO::PARAM_INT);
-        $prepare->bindValue(2, $admin->getIdAdmin(), PDO::PARAM_INT);
+        $prepare->bindValue(2, $admin, PDO::PARAM_STR);
+        $prepare->bindValue(3, $key, PDO::PARAM_STR);
 
         try {
 
