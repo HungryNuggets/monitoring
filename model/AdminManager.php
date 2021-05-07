@@ -67,7 +67,7 @@ class AdminManager extends ManagerTable {
     // VERIFY EXISTENCE
     public function verifyExistence(string $nickname, string $mail): int {
 
-        $sql = "SELECT * FROM user WHERE nickname_user = ? OR mail_user = ?;";
+        $sql = "SELECT * FROM admin WHERE nickname_admin = ? OR mail_admin = ?;";
 
         $prepare = $this->db->prepare($sql);
 

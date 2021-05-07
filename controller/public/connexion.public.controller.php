@@ -27,7 +27,7 @@ if (isset($_POST['signup'])) {
     } else {
 
         // CHECK IF THE NICKNAME OR EMAIL ARE ALREADY USED
-        $verifyExistence = $adminManager->verifyExistence($_POST['nickname_user'], $_POST['mail_user']);
+        $verifyExistence = $adminManager->verifyExistence($_POST['nickname_admin'], $_POST['mail_admin']);
 
         // IF ALREADY USED
         if ($verifyExistence >= 1){
@@ -65,12 +65,12 @@ if (isset($_POST['signup'])) {
                 if ($mailSignUp->send($messageSignUp)){
 
                     // WARNING
-                    $warningSignUp = "Hello ".$_POST['nickname_user']." ! Tu vas recevoir un mail :)";
+                    $warningSignUp = "Hello ".$_POST['nickname_admin']." ! Tu vas recevoir un mail :)";
 
                 } else {
 
                     // WARNING
-                    $warningSignUp = "Désolé ".$_POST['nickname_user'].", mais nous avons eu un soucis";
+                    $warningSignUp = "Désolé ".$_POST['nickname_admin'].", mais nous avons eu un soucis";
 
                 }
             }
