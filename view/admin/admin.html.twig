@@ -1,0 +1,55 @@
+{% extends "template_monitoring.html.twig" %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+
+            <h1 class="yellow w-100 text-center mx-auto title">Hello <span class="yellow">{{ session.nickname_admin }}</span> !</h1>
+            <p class="w-100 text-center mx-auto white letter-spacing">Ici tu peux voir et gérer les administrateurs</p>
+
+        </div>
+        <div class="row mt-4 mb-4">
+
+            <table class="table mb-5">
+                <thead>
+                <tr>
+                    <th scope="col">Pseudo de l'administrateur</th>
+                    <th scope="col">E-mail de contact</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Validation</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for admin in allAdmin %}
+                    <tr>
+                        <td class="text-center">{{ admin.nickname_admin }} </td>
+                        <td class="text-center">{{ admin.mail_admin }}</td>
+                        <td class="text-center">{% if admin.validation_status_admin == 2 %}
+                                <p><span class="badge badge-secondary">Doit confirmer son mail</span></p>
+                            {% elseif admin.validation_status_admin == 1 and admin.status_admin == 2 %}
+                                <p><span class="badge badge-warning">En attente de validation</span></p>
+                            {% elseif admin.validation_status_admin == 1 and admin.status_admin == 1 %}
+                                <p><span class="badge badge-success">Validé</span></p>
+                            {% endif %}
+                        </td>
+                        <td class="text-center">{% if admin.validation_status_admin == 2 %}
+                                -
+                            {% elseif admin.validation_status_admin == 1 and admin.status_admin == 2 %}
+                                <button>Valider cet admin</button>
+                            {% elseif admin.validation_status_admin == 1 and admin.status_admin == 1 %}
+                                &#x2713;
+                            {% endif %}</td>
+                        <td class="text-center">{% if session.id_admin == admin.id_admin %}
+                                <button>Voir mon profil</button>
+                            {% endif %}</td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
