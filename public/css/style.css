@@ -248,3 +248,65 @@ body {
 .main-container .container.right-panel-active .overlay-right {
     transform: translateY(20%);
 }
+
+button {
+    font-family: "Dosis", "Montserrat",sans-serif;
+    border-radius: 20px;
+    border: 1px solid #F4CA34;
+    background: #F4CA34;
+    color: #fff;
+    font-size: 0.9em;
+    font-weight: 500;
+    padding: 2px 25px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+    margin: 5px;
+}
+
+button:active {
+    transform: scale(.95);
+}
+
+button:focus {
+    outline: none;
+}
+
+.button-big {
+    font-size: 1.1em;
+    padding: 5px 25px;
+    margin: 10px;
+}
+
+table {
+    background-color: #0E101D;
+    font-size: 0.9em;
+    font-weight: 300;
+    color: #fff !important;
+}
+
+table th,
+table td {
+    border-top: 1px solid #15182B !important;
+}
+
+table th {
+    color: #F4CA34;
+    border-bottom: 1px solid #F4CA34 !important;
+    text-align: center;
+    letter-spacing: 2px;
+    vertical-align: middle !important;
+}
+
+table td {
+    border-right: 1px solid #15182B !important;
+    vertical-align: middle !important;
+}
+
+.title {
+    color : white;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: .5rem;
+    margin:30px;
+}

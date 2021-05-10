@@ -1,0 +1,45 @@
+{% extends "template_monitoring.html.twig" %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+
+            <h1 class="yellow w-100 text-center mx-auto title">Clients</h1>
+
+            <div class="container-sm  align-center mx-auto">
+                <button class="button-big">Ajouter un client</button>
+            </div>
+
+        </div>
+        <div class="row mt-4 mb-4">
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Nom de l'entreprise</th>
+                    <th scope="col">Nom de domaine</th>
+                    <th scope="col">Personne de contact</th>
+                    <th scope="col">E-mail de contact</th>
+                    <th scope="col">Téléphone de contact</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for customer in allCustomer %}
+                    <tr>
+                        <td>{{ customer.name_customer }}</td>
+                        <td>{{ customer.domain_customer }}</td>
+                        <td>{{ customer.contact_person_customer }}</td>
+                        <td>{{ customer.mail_customer }}</td>
+                        <td>{{ customer.phone_customer }}</td>
+                        <td class="w-25"><button>Modifier</button><button>Supprimer</button></td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
