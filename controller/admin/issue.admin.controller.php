@@ -1,7 +1,7 @@
 <?php
 // ISSUES GLOBAL DISPLAY WITH OPTIONS
 $issueManager = new IssueManager($DB);
-$info="TEST";
+$info="";
 
 // UPDATE OF THE ISSUE STATUS
 if (isset($_GET['update']) && ctype_digit($_GET['update'])) {
