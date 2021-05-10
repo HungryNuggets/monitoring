@@ -343,5 +343,13 @@ table td {
     background-color: #fff;
     color: #F4CA34;
     text-decoration: none;
+}
 
+label {
+    color: #fff;
+    letter-spacing: 2px;
+}
+
+#small-form {
+    transform: scale(0.8);
 }

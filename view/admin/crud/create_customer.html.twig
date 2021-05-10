@@ -1,0 +1,43 @@
+{% extends "template_monitoring.html.twig" %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+
+            <h1 class="yellow w-100 text-center mx-auto title">Un nouveau client ?</h1>
+            <p class="w-100 text-center mx-auto white letter-spacing text-warning">{% if warning %}
+                    {{ warning }}
+                {% endif %}</p>
+        </div>
+        <div class="container">
+
+            <form class="w-75 mx-auto" id="small-form" method="post">
+                <div class="form-group">
+                    <label>Nom de l'entreprise :</label>
+                    <input type="text" name="name_customer" class="form-control" placeholder="Hungry Nuggets" required>
+                </div>
+                <div class="form-group">
+                    <label>Nom de domaine :</label>
+                    <input type="text" name="domain_customer" class="form-control" placeholder="hungrynuggets.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Nom de la personne de contact :</label>
+                    <input type="text" name="contact_person_customer" class="form-control" placeholder="John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label>E-mail de contact :</label>
+                    <input type="email" name="mail_customer" class="form-control" placeholder="info@hungrynuggets.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Téléphone de contact :</label>
+                    <input type="tel" minlength="8" name="phone_customer" class="form-control" placeholder="04********" required>
+                </div>
+
+                <button type="submit" name="createCustomer" class="button-big float-right">Submit</button>
+            </form>
+
+        </div>
+    </div>
+
+{% endblock %}

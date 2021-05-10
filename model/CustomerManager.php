@@ -66,7 +66,7 @@ class CustomerManager extends ManagerTable {
     // SELECT ALL CUSTOMERS
     public function selectAllCustomers(): array {
 
-        $sql = "SELECT * FROM customer;";
+        $sql = "SELECT * FROM customer ORDER BY id_customer DESC;";
         $query = $this->db->query($sql);
 
         // IF THERE IS AT LEAST 1 RESULT

@@ -3,7 +3,7 @@
 // CREATE CUSTOMER
 if (isset($_GET['create'])){
 
-    require ROOT . "controller/admin/crud/crud.create.customer.controller.php";
+    require ROOT . "/controller/admin/crud/crud.create.customer.controller.php";
 
     exit();
 }
@@ -11,7 +11,7 @@ if (isset($_GET['create'])){
 // UPDATE CUSTOMER
 if (isset($_GET['update']) && ctype_digit($_GET['update'])){
 
-    require ROOT . "controller/admin/crud/crud.update.customer.controller.php";
+    require ROOT . "/controller/admin/crud/crud.update.customer.controller.php";
 
     exit();
 }
@@ -19,7 +19,7 @@ if (isset($_GET['update']) && ctype_digit($_GET['update'])){
 // UPDATE CUSTOMER
 if (isset($_GET['delete']) && ctype_digit($_GET['delete'])){
 
-    require ROOT . "controller/admin/crud/crud.delete.customer.controller.php";
+    require ROOT . "/controller/admin/crud/crud.delete.customer.controller.php";
 
     exit();
 }
