@@ -37,14 +37,14 @@ class IssueManager extends ManagerTable {
         }
     }
 
-    function updateIssue(Issue $issue, int $idAdmin) : bool {
+    function updateIssue(int $admin, int $idIssue) : bool {
 
-        $sql = "UPDATE issue SET status_issue = ?, admin_id_admin= ? WHERE id_admin=?; ";
+        $sql = "UPDATE issue SET status_issue = ?, admin_id_admin= ? WHERE id_issue=?; ";
         $prepare = $this->db->prepare($sql);
 
         $prepare->bindValue(1, 1, PDO::PARAM_INT);
-        $prepare->bindValue(2, $idAdmin, PDO::PARAM_INT);
-        $prepare->bindValue(3, $issue->getIdIssue(), PDO::PARAM_INT);
+        $prepare->bindValue(2, $admin, PDO::PARAM_INT);
+        $prepare->bindValue(3, $idIssue, PDO::PARAM_INT);
 
         try {
 

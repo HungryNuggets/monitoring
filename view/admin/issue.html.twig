@@ -8,6 +8,9 @@
             <h1 class="yellow w-100 text-center mx-auto title">Historique des problèmes</h1>
             <p class="w-100 text-center mx-auto white letter-spacing">Hello {{ session.nickname_admin }} !<br> Ici tu trouveras la liste des problèmes rencontrés et leur statut
                 <br> (controlé par un admin ou non)</p>
+            <p class="w-100 text-center mx-auto white letter-spacing">{% if info %}
+                {{ info }}
+            {% endif %}</p>
 
         </div>
         <div class="row mt-4 mb-4">
@@ -38,7 +41,10 @@
                             {% else %}
                                 -
                             {% endif %}</td>
-                        <td><button>Mettre à jour</button></td>
+                        <td>{% if issue.status_issue == 2 %}
+                                <a href="?issue&update={{ issue.id_issue }}"><button>Mettre à jour</button></a>
+                            {% endif %}
+                            </td>
                     </tr>
                 {% endfor %}
 
