@@ -35,9 +35,9 @@ class CustomerManager extends ManagerTable {
         }
     }
 
-    function updateCustomer(Customer $customer) : bool {
+    function updateCustomer(Customer $customer, int $idCustomer) : bool {
 
-        $sql = "UPDATE customer SET name_customer= ?, domain_customer= ?,contact_person_user= ?, mail_customer= ?, phone_customer= ? WHERE id_customer=?; ";
+        $sql = "UPDATE customer SET name_customer= ?, domain_customer= ?,contact_person_customer= ?, mail_customer= ?, phone_customer= ? WHERE id_customer=?; ";
         $prepare = $this->db->prepare($sql);
 
         $prepare->bindValue(1, $customer->getNameCustomer(), PDO::PARAM_STR);
@@ -45,7 +45,7 @@ class CustomerManager extends ManagerTable {
         $prepare->bindValue(3, $customer->getContactPersonCustomer(), PDO::PARAM_STR);
         $prepare->bindValue(4, $customer->getMailCustomer(), PDO::PARAM_STR);
         $prepare->bindValue(5, $customer->getPhoneCustomer(), PDO::PARAM_STR);
-        $prepare->bindValue(6, $customer->getIdCustomer(), PDO::PARAM_INT);
+        $prepare->bindValue(6, $idCustomer, PDO::PARAM_INT);
 
         try {
 
