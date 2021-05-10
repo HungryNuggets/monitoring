@@ -62,4 +62,21 @@ class IssueManager extends ManagerTable {
         }
     }
 
+    // SELECT ALL ISSUE (ORDER BY)
+    public function selectAllIssue() : array {
+        $sql = "SELECT issue.*, customer.*, admin.nickname_admin FROM issue 
+                LEFT JOIN customer ON customer_id_customer = id_customer 
+                LEFT JOIN admin ON admin_id_admin = id_admin
+                ORDER BY status_issue DESC;";
+        $query = $this->db->query($sql);
+
+        // IF THERE IS AT LEAST 1 RESULT
+        if ($query->rowCount()) {
+            return $query->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        // IF NOT
+        return [];
+    }
+
 }

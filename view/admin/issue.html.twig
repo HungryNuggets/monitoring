@@ -1,0 +1,50 @@
+{% extends "template_monitoring.html.twig" %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+
+            <h1 class="yellow w-100 text-center mx-auto title">Historique des problèmes</h1>
+            <p class="w-100 text-center mx-auto white letter-spacing">Hello {{ session.nickname_admin }} !<br> Ici tu trouveras la liste des problèmes rencontrés et leur statut
+                <br> (controlé par un admin ou non)</p>
+
+        </div>
+        <div class="row mt-4 mb-4">
+
+            <table class="table mb-5">
+                <thead>
+                <tr>
+                    <th scope="col">Entreprise concerné et contact</th>
+                    <th scope="col">Problème et date d'occurence</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Admin contrôleur</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for issue in allIssue %}
+                    <tr>
+                        <td>{{ issue.name_customer }} <br> {{ issue.contact_person_customer }} <br> {{ issue.mail_customer }} || {{ issue.phone_customer }}</td>
+                        <td>{{ issue.desc_issue }} <br> Enregister le : {{ issue.timestamp_issue }}</td>
+                        <td class="text-center">{% if issue.status_issue == 1 %}
+                                <p><span class="badge badge-secondary">Contrôlé</span></p>
+                            {% elseif issue.status_issue == 2 %}
+                                <p><span class="badge badge-warning">En attente de contrôle</span></p>
+                            {% endif %}
+                        </td>
+                        <td class="text-center">{% if issue.admin_id_admin != "" %}
+                                {{ issue.nickname_admin }}
+                            {% else %}
+                                -
+                            {% endif %}</td>
+                        <td><button>Mettre à jour</button></td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

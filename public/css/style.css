@@ -23,6 +23,14 @@ body {
     color: #F4CA34;
 }
 
+.letter-spacing {
+    letter-spacing: 1px;
+}
+
+.white {
+    color: #fff;
+}
+
 .nav-look {
     color : white;
     font-weight: 600;
