@@ -298,29 +298,18 @@ class AdminManager extends ManagerTable {
     // READ ALL
     public function selectAllAdmin() : array {
 
-        $sql = "SELECT * FROM admin WHERE status_admin = ?";
-        $prepare = $this->db->prepare($sql);
+        $sql = "SELECT * FROM admin 
+                ORDER BY status_admin ASC, 
+                validation_status_admin ASC;";
+        $query = $this->db->query($sql);
 
-        try {
-
-            $prepare->execute([1]);
-
-            // IF THERE IS AT LEAST ONE RESULT
-            if ($prepare->rowCount()) {
-
-                return $prepare->fetchAll(PDO::FETCH_ASSOC);
-
-                // IF NOT
-            } else {
-                return [];
-            }
-
-        } catch (Exception $e) {
-
-            trigger_error($e->getMessage());
-            // IF NOT
-            return [];
-
+        // IF THERE IS AT LEAST 1 RESULT
+        if ($query->rowCount()) {
+            return $query->fetchAll(PDO::FETCH_ASSOC);
         }
+
+        // IF NOT
+        return [];
+
     }
 }

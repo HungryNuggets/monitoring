@@ -31,3 +31,5 @@ if (isset($_GET['disconnection'])) {
     header("Location: ./");
     exit();
 }
+
+require  ROOT."/controller/admin/home.admin.controller.php";
