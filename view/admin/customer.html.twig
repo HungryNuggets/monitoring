@@ -33,7 +33,8 @@
                         <td>{{ customer.contact_person_customer }}</td>
                         <td>{{ customer.mail_customer }}</td>
                         <td>{{ customer.phone_customer }}</td>
-                        <td class="w-25"><a href="?customer&update={{ customer.id_customer }}"><button>Modifier</button></a><button>Supprimer</button></td>
+                        <td class="w-25"><a href="?customer&update={{ customer.id_customer }}"><button>Modifier</button></a><a
+                                    href="?customer&delete={{ customer.id_customer }}"><button>Supprimer</button></a></td>
                     </tr>
                 {% endfor %}
 

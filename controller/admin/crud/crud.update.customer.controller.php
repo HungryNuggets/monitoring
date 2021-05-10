@@ -36,5 +36,5 @@ echo $twig->render("admin/crud/update_customer.html.twig",
         "admin" => 'yes',
         "session" => $_SESSION,
         "warning" => $warning,
-        "customer"=>$customerDisplay,
+        "customer"=>$customerDisplay
     ]);

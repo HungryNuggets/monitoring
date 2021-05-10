@@ -1,0 +1,24 @@
+{% extends "template_monitoring.html.twig" %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+
+            <h1 class="yellow w-100 text-center mx-auto title">Suppression</h1>
+            <p class="w-100 text-center mx-auto white letter-spacing text-warning">{% if warning %}
+                    {{ warning }}
+                {% endif %}</p>
+        </div>
+        <div class="container">
+            <div class="card mx-auto" style="width: 28rem;">
+                <div class="card-body mx-auto">
+                    <h5 class="card-title">{{ customer.name_customer }} <br> {{ customer.domain_customer }}</h5>
+                    <p class="card-text">{{ customer.contact_person_customer }} <br> {{ customer.mail_customer }} <br> {{ customer.phone_customer }}</p>
+                    <a href="?customer&delete={{ customer.id_customer }}&admin=ok" class="button-big"><button>Yep, on supprime ça !</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
