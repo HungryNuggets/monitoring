@@ -12,7 +12,7 @@ if (isset($_POST['signin'])) {
 
     if ($verifyRights === ''){
         if($adminManager->signIn($adminInstance)) {
-            header("Location: ./");
+            header("Location: ?customer");
             exit();
         }
     } else {
