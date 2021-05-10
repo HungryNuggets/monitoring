@@ -9,6 +9,10 @@ body {
     background-color: #121421;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 .main-img {
     height: 50px;
     width: auto;
@@ -317,4 +321,27 @@ table td {
     text-transform: uppercase;
     padding: .5rem;
     margin:30px;
+}
+
+.back-to-top-link {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 1rem;
+    line-height: 2rem;
+    text-align: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-color: #F4CA34;
+    color: #fff;
+    position: fixed;
+    bottom: 7vh;
+    right: 2vw;
+}
+
+.back-to-top-link:hover {
+    background-color: #fff;
+    color: #F4CA34;
+    text-decoration: none;
+
 }
