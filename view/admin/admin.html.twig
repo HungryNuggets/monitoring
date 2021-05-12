@@ -37,12 +37,12 @@
                         <td class="text-center">{% if admin.validation_status_admin == 2 %}
                                 -
                             {% elseif admin.validation_status_admin == 1 and admin.status_admin == 2 %}
-                                <button>Valider cet admin</button>
+                                <a href="?admin&update={{ admin.id_admin }}"><button>Valider cet admin</button></a>
                             {% elseif admin.validation_status_admin == 1 and admin.status_admin == 1 %}
                                 &#x2713;
                             {% endif %}</td>
                         <td class="text-center">{% if session.id_admin == admin.id_admin %}
-                                <button>Voir mon profil</button>
+                                <a href="?admin&profil={{ admin.id_admin }}"><button>Voir mon profil</button></a>
                             {% endif %}</td>
                     </tr>
                 {% endfor %}

@@ -4,10 +4,12 @@
  * Class AdminManager
  * Manager for the admin table
  */
-class AdminManager extends ManagerTable {
+class AdminManager extends ManagerTable
+{
 
     // SIGN UP METHOD
-    public function signUp(Admin $admin) : bool {
+    public function signUp(Admin $admin): bool
+    {
 
         // PASSWORD CRYPT
         $cryptPassword = $this->passwordHash($admin->getPwdAdmin());
@@ -42,7 +44,8 @@ class AdminManager extends ManagerTable {
     }
 
     // SELECT DATAS FOR SIGN UP VERIFICATION
-    public function selectSignUp(string $mail) : array {
+    public function selectSignUp(string $mail): array
+    {
         $sql = "SELECT nickname_admin, confirmation_key_admin FROM admin WHERE mail_admin = ? ;";
         $request = $this->db->prepare($sql);
         $request->execute([$mail]);
@@ -55,7 +58,8 @@ class AdminManager extends ManagerTable {
     }
 
     // SIGN IN
-    public function signIn(Admin $admin) : bool {
+    public function signIn(Admin $admin): bool
+    {
 
         $query = "SELECT * FROM admin WHERE nickname_admin = ? ;";
         $req = $this->db->prepare($query);
@@ -83,46 +87,51 @@ class AdminManager extends ManagerTable {
     }
 
     // SIGN IN RIGHTS VERIFICATION
-    public function signInRightVerification(Admin $admin): string {
+    public function signInRightVerification(Admin $admin): string
+    {
         $sql = "SELECT nickname_admin, status_admin, validation_status_admin FROM admin WHERE nickname_admin = ? ;";
         $req = $this->db->prepare($sql);
-        $req->bindValue(1,$admin->getNicknameAdmin(),PDO::PARAM_STR);
-        try{
+        $req->bindValue(1, $admin->getNicknameAdmin(), PDO::PARAM_STR);
+        try {
             $req->execute();
-            if($req->rowCount()){
+            if ($req->rowCount()) {
                 $adminInfo = $req->fetch(PDO::FETCH_ASSOC);
-                if ($adminInfo['validation_status_admin'] == 2 ){
+                if ($adminInfo['validation_status_admin'] == 2) {
                     return "Vous devez confirmer votre adresse e-mail avant de vous connecter";
-                } else if ($adminInfo['status_admin'] == 2){
+                } else if ($adminInfo['status_admin'] == 2) {
                     return "Un administrateur étudie votre demande, vous serez prévenu si votre compte est accepté";
                 } else {
                     return "";
                 }
-            }else{
+            } else {
                 return "Something went wrong, please retry";
             }
-        }catch (PDOException $e){
+        } catch (PDOException $e) {
             return $e->getMessage();
         }
     }
 
     // AUTOMATICALLY GENERATED KEY
-    protected function validationKey(): string {
+    protected function validationKey(): string
+    {
         return md5(microtime(TRUE) * 100000);
     }
 
     // PASSWORD HASH
-    protected function passwordHash(string $pwd): string {
+    protected function passwordHash(string $pwd): string
+    {
         return password_hash($pwd, PASSWORD_DEFAULT);
     }
 
     // VERIFY PASSWORD
-    protected function verifyPassword(string $cryptPwd, string $pwd): bool {
+    protected function verifyPassword(string $cryptPwd, string $pwd): bool
+    {
         return password_verify($pwd, $cryptPwd);
     }
 
     // SESSION
-    protected function createSession(array $datas): bool {
+    protected function createSession(array $datas): bool
+    {
         unset($datas['pwd_admin']);
         $_SESSION = $datas;
         $_SESSION['session_id'] = session_id();
@@ -130,7 +139,8 @@ class AdminManager extends ManagerTable {
     }
 
     // VERIFY EXISTENCE
-    public function verifyExistence(string $nickname, string $mail): int {
+    public function verifyExistence(string $nickname, string $mail): int
+    {
 
         $sql = "SELECT * FROM admin WHERE nickname_admin = ? OR mail_admin = ?;";
 
@@ -145,13 +155,14 @@ class AdminManager extends ManagerTable {
     }
 
     // SELECT VALIDATED ADMIN
-    public function selectValidatedAdmins(): array {
+    public function selectValidatedAdmins(): array
+    {
         $sql = "SELECT mail_admin FROM admin WHERE status_admin = ? AND validation_status_admin = ? ;";
         $prepare = $this->db->prepare($sql);
 
         try {
 
-            $prepare->execute([1,1]);
+            $prepare->execute([1, 1]);
 
             // IF THERE IS AT LEAST ONE RESULT
             if ($prepare->rowCount()) {
@@ -173,7 +184,8 @@ class AdminManager extends ManagerTable {
     }
 
     // DISCONNECTION
-    public static function disconnection(): bool {
+    public static function disconnection(): bool
+    {
 
         $_SESSION = array();
 
@@ -191,7 +203,8 @@ class AdminManager extends ManagerTable {
     }
 
     // UPDATE ADMIN'S MAIN INFOS
-    function updateAdminInfos(Admin $admin) : bool {
+    function updateAdminInfos(Admin $admin): bool
+    {
 
         $sql = "UPDATE admin SET nickname_admin= ?, mail_admin= ? WHERE id_admin= ?; ";
         $prepare = $this->db->prepare($sql);
@@ -217,7 +230,8 @@ class AdminManager extends ManagerTable {
     }
 
     // UPDATE ADMIN'S PASSWORD
-    function updateAdminPassword(Admin $admin) : bool {
+    function updateAdminPassword(Admin $admin): bool
+    {
 
         // PASSWORD CRYPT
         $cryptPassword = $this->passwordHash($admin->getPwdAdmin());
@@ -245,13 +259,14 @@ class AdminManager extends ManagerTable {
     }
 
     // UPDATE ADMIN'S STATUS
-    function updateAdminStatus(Admin $admin) : bool {
+    function updateAdminStatus(int $idAdmin): bool
+    {
 
         $sql = "UPDATE admin SET status_admin= ? WHERE id_admin= ?; ";
         $prepare = $this->db->prepare($sql);
 
         $prepare->bindValue(1, 1, PDO::PARAM_INT);
-        $prepare->bindValue(2, $admin->getIdAdmin(), PDO::PARAM_INT);
+        $prepare->bindValue(2, $idAdmin, PDO::PARAM_INT);
 
         try {
 
@@ -270,7 +285,8 @@ class AdminManager extends ManagerTable {
     }
 
     // UPDATE ADMIN'S VALIDATION STATUS
-    function updateAdminValidationStatus(string $admin, string $key) : bool {
+    function updateAdminValidationStatus(string $admin, string $key): bool
+    {
 
         $sql = "UPDATE admin SET validation_status_admin= ? WHERE nickname_admin= ? AND confirmation_key_admin = ?; ";
         $prepare = $this->db->prepare($sql);
@@ -296,7 +312,8 @@ class AdminManager extends ManagerTable {
     }
 
     // READ ALL
-    public function selectAllAdmin() : array {
+    public function selectAllAdmin(): array
+    {
 
         $sql = "SELECT * FROM admin 
                 ORDER BY status_admin ASC, 
@@ -311,5 +328,35 @@ class AdminManager extends ManagerTable {
         // IF NOT
         return [];
 
+    }
+
+    // SELECT ONE ADMIN BY ID
+    public function selectOneAdmin(int $idAdmin): array
+    {
+
+        $sql = "SELECT * FROM admin WHERE id_admin = ?";
+        $prepare = $this->db->prepare($sql);
+
+        try {
+
+            $prepare->execute([$idAdmin]);
+
+            // IF THERE IS A RESULT
+            if ($prepare->rowCount()) {
+
+                return $prepare->fetch(PDO::FETCH_ASSOC);
+
+                // IF NOT
+            } else {
+                return [];
+            }
+
+        } catch (Exception $e) {
+
+            trigger_error($e->getMessage());
+            // IF NOT
+            return [];
+
+        }
     }
 }

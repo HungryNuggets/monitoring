@@ -1,6 +1,5 @@
 <?php
-// ISSUES GLOBAL DISPLAY WITH OPTIONS
-$issueManager = new IssueManager($DB);
+
 $info="";
 
 // UPDATE OF THE ISSUE STATUS

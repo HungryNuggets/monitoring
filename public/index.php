@@ -32,6 +32,7 @@ $DB = MyPDO::getInstance(DB_TYPE . ":host=" . DB_HOST . ";dbname=" . DB_NAME . "
 // MANAGERS
 $adminManager = new AdminManager($DB);
 $customerManager = new CustomerManager($DB);
+$issueManager = new IssueManager($DB);
 
 // TWIG VIEWS
 $loader = new FilesystemLoader(ROOT . '/view');
