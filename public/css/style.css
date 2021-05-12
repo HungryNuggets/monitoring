@@ -353,3 +353,11 @@ label {
 #small-form {
     transform: scale(0.8);
 }
+
+.monitoring-card {
+    color : #fff;
+    width: 300px;
+    border: 1px solid #0E101D;
+    height: 250px;
+    margin: 5px 35px;
+}

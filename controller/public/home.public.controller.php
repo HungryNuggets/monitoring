@@ -4,4 +4,7 @@
 require ROOT . '/controller/global/home.controller.php';
 
 // TWIG RENDER
-echo $twig->render("public/home.html.twig",["admin"=>'no']);
+echo $twig->render("public/home.html.twig",[
+    "admin"=>'no',
+    "allCustomer"=>$fullCustomerList
+]);
