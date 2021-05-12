@@ -2,14 +2,16 @@
 
 {% block content %}
 
-        <div class="container d-flex justify-content-around p-2 align-items-center align-self-center flex-wrap flex-row">
-                {% for customer in allCustomer %}
-                        <div class="p-2 monitoring-card">
-                                <em class="small float-end">{{ customer.id_customer }}</em>
-                                <h2 class="red d-inline-block">{{ customer.name_customer }} </h2>
-                                <h3 class="d-inline-block">=> {{ customer.domain_customer }}</h3>
-                                <p>{{ customer.contact_person_customer }}</p>
-                        </div>
-                {% endfor %}
-        </div>
+    <div class="container d-flex justify-content-around p-2 align-items-center align-self-center flex-wrap flex-row">
+        {% for customer in allCustomer %}
+            <div class="p-2 monitoring-card">
+                <div>
+                    <h2 class="">{{ customer.name_customer }} </h2>
+                </div>
+                <em class="">{{ customer.domain_customer }}</em>
+                <p>{{ customer.test }}</p>
+                <a href="?customer={{ customer.id_admin }}"><button>Voir les détails</button></a>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

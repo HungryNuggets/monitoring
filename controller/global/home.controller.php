@@ -1,5 +1,8 @@
 <?php
 
+// REFRESH
+header("Refresh:60");
+
 // LIST FOR RENDER
 $fullCustomerList = [];
 
@@ -8,5 +11,5 @@ $allCustomer = $customerManager->selectAllCustomers();
 
 for ($i = 0; $i < count($allCustomer); $i++){
     $fullCustomerList[$i] = $allCustomer[$i];
-    array_push($fullCustomerList[$i], ['test'=>'yes']);
+    $fullCustomerList[$i]['test'] = 'yes, this is the test';
 }
