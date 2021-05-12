@@ -11,10 +11,13 @@
         </div>
         <div class="row mt-4 mb-4">
             <div class="container">
-                <div class="row">
+                <div class="row mb-4">
                     <div class="col mt-4">
-                        <form>
-                            <input type="text" value="{{ thisAdmin.id_admin }}" hidden>
+                        <p class="w-100 text-center mx-auto white letter-spacing text-warning">{% if warningInfo %}
+                                {{ warningInfo }}
+                            {% endif %} </p>
+                        <form method="post">
+                            <input type="hidden" name="id_admin" value="{{ thisAdmin.id_admin }}">
                             <div class="form-group">
                                 <label>Ton pseudo :</label>
                                 <input type="text" name="nickname_admin" class="form-control" value="{{ thisAdmin.nickname_admin }}">
@@ -27,14 +30,18 @@
                         </form>
                     </div>
                     <div class="col">
-                        <form>
+                        <p class="w-100 text-center mx-auto white letter-spacing text-warning">{% if warningPwd %}
+                                {{ warningPwd }}
+                            {% endif %} </p>
+                        <form method="post">
                             <div class="form-group mt-2">
+                                <input type="hidden" name="id_admin" value="{{ thisAdmin.id_admin }}">
                                 <label>Ancien mot de passe :</label>
                                 <input type="password" name="oldPwd" class="form-control" placeholder="Ancien mot de passe">
                             </div>
                             <div class="form-group">
                                 <label>Nouveau mot de passe :</label>
-                                <input type="password" name="newPwd" class="form-control mb-2" placeholder="Nouveau mot de passe">
+                                <input type="password" name="pwd_admin" class="form-control mb-2" placeholder="Nouveau mot de passe">
                                 <input type="password" name="checkupNewPwd" class="form-control" placeholder="Répéter le nouveau mot de passe">
                             </div>
                             <button type="submit" name="adminPwdUpdate" class="float-right">Submit</button>

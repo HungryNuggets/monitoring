@@ -218,6 +218,8 @@ class AdminManager extends ManagerTable
             $prepare->execute();
 
             // IF OKAY
+            $_SESSION['nickname_admin'] = $admin->getNicknameAdmin();
+            $_SESSION['mail_admin'] = $admin->getMailAdmin();
             return true;
 
         } catch (Exception $e) {
@@ -357,6 +359,32 @@ class AdminManager extends ManagerTable
             // IF NOT
             return [];
 
+        }
+    }
+
+    // PASSWORD VERIFY BY ADMIN
+    public function adminPwdVerify(int $idAdmin, string $pwd) : bool {
+
+        $query = "SELECT * FROM admin WHERE id_admin = ? ;";
+        $req = $this->db->prepare($query);
+        $req->bindValue(1, $idAdmin, PDO::PARAM_STR);
+
+        try {
+            $req->execute();
+
+            // IF THERE IS A RESULT
+            if ($req->rowCount()) {
+                $connectedAdmin = $req->fetch(PDO::FETCH_ASSOC);
+                if ($this->verifyPassword($connectedAdmin['pwd_admin'], $pwd)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            return $e->getMessage();
         }
     }
 }
