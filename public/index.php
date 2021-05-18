@@ -49,6 +49,12 @@ $transport = (new Swift_SmtpTransport(MAIL_SMTP, MAIL_PORT, MAIL_ENCRYPTION))
         'allow_self_signed' => true
     )));
 
+// OVH API STARTER
+$ovh = new Api( APP_KEY,
+    APP_SECRET,
+    END_POINT,
+    CON_KEY);
+
 // ON ADMIN CONNECTION
 if (isset($_SESSION['session_id']) && $_SESSION['session_id'] === session_id()) {
 

@@ -25,4 +25,5 @@ define("MAIL_ENCRYPTION", 'TLS');
 define('APP_KEY', '');
 define('APP_SECRET','');
 define('CON_KEY','');
+define('END_POINT', '');
 define('REDIRECT', '');
