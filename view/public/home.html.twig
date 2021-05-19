@@ -8,24 +8,25 @@
                 <div>
                     <h2>{{ customer.name_customer }} </h2>
                 </div>
-                <br>
                 <em>{{ customer.domain_customer }}</em>
+                <br>
                 <p>
+                    {% if customer.domain == true %}
+                        Domain : ✔
+                    {% elseif customer.domain == false %}
+                        Domain : ✗
+                    {% endif %}
+                    <br>
                     {% if customer.DNS == true %}
                         DNS : ✔
                     {% elseif customer.DNS == false %}
                         DNS : ✗
                     {% endif %}
-                    {% if customer.server == true %}
-                        || Server : ✔
-                    {% elseif customer.server == false %}
-                        || Server : ✗
-                    {% endif %}
                     <br>
-                    {% if customer.domain == true %}
-                         Expiration nom de domaine : {{ customer.domain }}
-                    {% elseif customer.domain == false %}
-                        Nom de domaine : <br>✗
+                    {% if customer.server == true %}
+                        Server : ✔
+                    {% elseif customer.server == false %}
+                        Server : ✗
                     {% endif %}
                 </p>
                 {% if customer.DNS == true and customer.server == true and customer.domain == true %}

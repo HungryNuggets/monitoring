@@ -171,14 +171,28 @@ class CustomerManager extends ManagerTable {
     }
 
     // SERVER STATUS WITH OVH API
-    public function serverStatus($ovh, string $domain,int $idCustomer,IssueManager $issueManager) : bool {
+    public function serverStatus($ovh, string $hosting,int $idCustomer,IssueManager $issueManager) : bool {
+
+        // API
+        $apiIncident = $ovh->get('/hosting/web/incident');
 
         try {
             // API
-            return $ovh->get('/domain/zone/'.$domain.'/serviceInfos')['status'];
+            $apiActive = $ovh->get('/hosting/web/'.$hosting)['state'];
 
             // IF SOMETHING WRONG
         } catch (GuzzleHttp\Exception\ClientException $e) {
+
+            return false;
+
+        }
+
+        // IF THE SERVICE IS ACTIVE AND THERE IS NO ERRORS
+        if (empty($apiIncident) && $apiActive === 'active'){
+
+            return true;
+
+        } else {
 
             // CHECK IF THERE IS ONGOING ISSUE FOR THIS CUSTOMER
             $ongoingIssue = $issueManager->ongoingIssue($idCustomer);
@@ -200,31 +214,41 @@ class CustomerManager extends ManagerTable {
     }
 
     // SERVER STATUS WITH OVH API
-    public function domainStatus($ovh, string $domain,int $idCustomer,IssueManager $issueManager) : string {
+    public function domainStatus($ovh, string $domain,int $idCustomer,IssueManager $issueManager) : bool {
 
         try {
             // API
-            return $ovh->get('/domain/zone/'.$domain.'/serviceInfos')['expiration'];
+            $api = $ovh->get('/domain/zone/'.$domain.'/serviceInfos')['status'];
 
-            // IF SOMETHING WRONG
-        } catch (GuzzleHttp\Exception\ClientException $e) {
+            if ($api === 'ok') {
 
-            // CHECK IF THERE IS ONGOING ISSUE FOR THIS CUSTOMER
-            $ongoingIssue = $issueManager->ongoingIssue($idCustomer);
+                 return true;
 
-            // IF THERE IS
-            if ($ongoingIssue) {
-
-                return "";
-
-                // IF NOT
             } else {
 
-                // NEW ISSUE
-                $issueManager->newIssue("Domain name related problem", $idCustomer);
-                return "";
+                // CHECK IF THERE IS ONGOING ISSUE FOR THIS CUSTOMER
+                $ongoingIssue = $issueManager->ongoingIssue($idCustomer);
 
+                // IF THERE IS
+                if ($ongoingIssue) {
+
+                    return false;
+
+                    // IF NOT
+                } else {
+
+                    // NEW ISSUE
+                    $issueManager->newIssue("Domain related problem", $idCustomer);
+                    return false;
+
+                }
             }
+
+        // IF SOMETHING WRONG
+        } catch (GuzzleHttp\Exception\ClientException $e) {
+
+            return false;
+
         }
     }
 }

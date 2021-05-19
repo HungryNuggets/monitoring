@@ -361,7 +361,7 @@ label {
     border: 1px solid #0E101D;
     border-radius: 20px;
     background-color: #0E101D;
-    height: 290px;
+    height: 230px;
     margin: 25px 35px;
     text-align: center;
 }
@@ -392,11 +392,16 @@ label {
     width: 160px;
     height: auto;
     position : relative;
-    bottom : 45px;
-    left: 90px;
+    bottom : 90px;
+    left: 100px;
 }
 
 .monitoring-card a {
     position: relative;
-    bottom: 110px;
+    bottom: 145px;
+}
+
+.monitoring-card p {
+    text-align: left;
+    margin: 15px auto 0 65px;
 }
