@@ -10,7 +10,7 @@ class CustomerManager extends ManagerTable {
     public function newCustomer(Customer $customer): bool {
 
         // CUSTOMER INSERT
-        $sql = "INSERT INTO customer (name_customer, domain_customer, hosting_customer, contact_person_customer, mail_customer, phone_customer) VALUES (?,?,?,?,?)";
+        $sql = "INSERT INTO customer (name_customer, domain_customer, hosting_customer, contact_person_customer, mail_customer, phone_customer) VALUES (?,?,?,?,?,?)";
         $prepare = $this->db->prepare($sql);
 
         try {

@@ -320,7 +320,7 @@ table td {
     font-weight: 600;
     text-transform: uppercase;
     padding: .5rem;
-    margin:30px;
+    margin:30px auto 0 auto;
 }
 
 .back-to-top-link {
@@ -348,6 +348,7 @@ table td {
 label {
     color: #fff;
     letter-spacing: 2px;
+    margin-bottom: 0 !important;
 }
 
 #small-form {
