@@ -213,7 +213,39 @@ class CustomerManager extends ManagerTable {
         }
     }
 
-    // SERVER STATUS WITH OVH API
+    // SERVER FULL STATUS WITH OVH API
+    public function serverFullStatus($ovh, string $domain, string $hosting) : array {
+
+        try {
+
+            // API
+            return $ovh->get('/hosting/web/'.$hosting.'/attachedDomain/'.$domain);
+
+            // IF SOMETHING WRONG
+        } catch (GuzzleHttp\Exception\ClientException $e) {
+
+            return [];
+
+        }
+    }
+
+    // SERVER SPECIFICATION FULL STATUS WITH OVH API
+    public function serverSpeFullStatus($ovh, string $hosting) : array {
+
+        try {
+
+            // API
+            return $ovh->get('/hosting/web/'.$hosting);
+
+            // IF SOMETHING WRONG
+        } catch (GuzzleHttp\Exception\ClientException $e) {
+
+            return [];
+
+        }
+    }
+
+    // DOMAIN STATUS WITH OVH API
     public function domainStatus($ovh, string $domain,int $idCustomer,IssueManager $issueManager) : bool {
 
         try {
@@ -222,7 +254,7 @@ class CustomerManager extends ManagerTable {
 
             if ($api === 'ok') {
 
-                 return true;
+                return true;
 
             } else {
 
@@ -244,10 +276,26 @@ class CustomerManager extends ManagerTable {
                 }
             }
 
-        // IF SOMETHING WRONG
+            // IF SOMETHING WRONG
         } catch (GuzzleHttp\Exception\ClientException $e) {
 
             return false;
+
+        }
+    }
+
+    // DOMAIN FULL STATUS WITH OVH API
+    public function domainFullStatus($ovh, string $domain) : array {
+
+        try {
+
+            // API
+            return $ovh->get('/domain/zone/'.$domain.'/serviceInfos');
+
+            // IF SOMETHING WRONG
+        } catch (GuzzleHttp\Exception\ClientException $e) {
+
+            return [];
 
         }
     }

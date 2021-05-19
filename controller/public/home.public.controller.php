@@ -1,7 +1,7 @@
 <?php
 
 // REFRESH
-header("Refresh:60");
+header("Refresh:300");
 
 // FOR ONE CUSTOMER INFOS AND STATUS
 if (isset($_GET['customerDetail']) && ctype_digit($_GET['customerDetail'])) {

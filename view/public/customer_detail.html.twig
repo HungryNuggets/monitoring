@@ -2,4 +2,145 @@
 
 {% block content %}
 
+    <div class="container">
+        <div class="row m-4">
+            <h1 class="yellow w-100 text-center mx-auto title">{{ customer.itself.name_customer }}</h1>
+        </div>
+        <div class="row mb-2 text-center">
+            <div class="col-md-4 text-left">
+                <div class="flex-md-row mb-4 box-shadow h-md-250">
+                    <div class="background-dark card-body d-flex flex-column align-items-start">
+                        <div class="mb-0">
+                            <h3 class="yellow text-uppercase font-weight-bold">Infos</h3>
+                        </div>
+                        <p class="text-light mb-auto"><span class="text-muted">Nom de domaine :</span><br> {{ customer.itself.domain_customer }}</p>
+                        <p class="text-light mb-auto"><span class="text-muted">Nom de l'hébergement :</span><br> {% if admin == "yes" %}
+                                {{ customer.itself.hosting_customer }}
+                            {% else %}
+                                **********************
+                            {% endif %}
+                        </p>
+                        <p class="text-light mb-auto"><span class="text-muted">Nom de la personne de contact :</span><br>
+                            {% if admin == "yes" %}
+                                {{ customer.itself.contact_person_customer }}
+                            {% else %}
+                                ******* ********
+                            {% endif %}
+                        </p>
+                        <p class="text-light mb-auto"><span class="text-muted">Adresse e-mail de contact :</span><br>
+                            {% if admin == "yes" %}
+                                {{ customer.itself.mail_customer }}
+                            {% else %}
+                                *******@**********
+                            {% endif %}
+                        </p>
+                        <p class="text-light mb-auto"><span class="text-muted">Numéro de téléphone de contact :</span><br>
+                            {% if admin == "yes" %}
+                                {{ customer.itself.phone_customer }}
+                            {% else %}
+                                ******* ********
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 text-left">
+                <div class="flex-md-row mb-4 box-shadow h-md-250">
+                    <div class="background-dark card-body d-flex flex-column align-items-start">
+                        <div class="mb-0">
+                            <h3 class="yellow text-uppercase font-weight-bold">Domaine</h3>
+                        </div>
+                        <p class="text-light mb-auto"><span class="text-muted">État du nom de domaine :</span><br> {{ customer.domain.status }}</p>
+                        <p class="text-light mb-auto"><span class="text-muted">Date de création :</span><br> {{ customer.domain.creation }}</p>
+                        <p class="text-light mb-auto"><span class="text-muted">Date d'expiration :</span><br>{% if admin == "yes" %}
+                            {{ customer.domain.expiration }}
+                        {% else %}
+                            **/**/****
+                            {% endif %}
+                        </p>
+                        <p class="text-light mb-auto"><span class="text-muted">Compte référent :</span><br>
+                            {% if admin == "yes" %}
+                                {{ customer.domain.contactTech }}
+                            {% else %}
+                                ********-ovh
+                            {% endif %}
+                        </p>
+                        <p class="text-light mb-auto"><span class="text-muted">Renouvellement:</span><br>
+                            {% if admin == "yes" %}
+                                {% if customer.domain.renew.automatic %}
+                                    Automatiquement,
+                                {% else %}
+                                    Manuellement,
+                                {% endif %}
+                                pour les {{ customer.domain.renew.period }} mois suivant.
+                            {% else %}
+                                ******* ********
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 text-left">
+                <div class="flex-md-row mb-4 box-shadow h-md-250">
+                    <div class="background-dark card-body d-flex flex-column align-items-start">
+                        <div class="mb-0">
+                            <h3 class="yellow text-uppercase font-weight-bold">Serveur</h3>
+                        </div>
+                        <p class="text-light mb-auto"><span class="text-muted">Certificat SSL :</span><br>
+                            {% if admin == "yes" %}
+                                {% if customer.server.ssl %}
+                                    Yes
+                                {% else %}
+                                    {% if customer.server.ssl == "" %}
+                                        Unknown
+                                    {% else %}
+                                        No
+                                    {% endif %}
+                                {% endif %}
+                            {% else %}
+                                ******
+                            {% endif %}
+                        </p>
+                        <p class="text-light mb-auto"><span class="text-muted">Firewall :</span><br>
+                            {% if admin == "yes" %}
+                                {% if customer.server.firewall == "" %}
+                                    Unknown
+                                {% else %}
+                                    {{ customer.server.firewall }}
+                                {% endif %}
+                            {% else %}
+                                ******
+                            {% endif %}
+                        </p>
+                        <p class="text-light mb-auto"><span class="text-muted">Posséde un CDN :</span><br>
+                            {% if admin == "yes" %}
+                                {% if customer.server.cdn == "" %}
+                                    Unknown
+                                {% else %}
+                                    {{ customer.server.cdn }}
+                                {% endif %}
+                            {% else %}
+                                ******
+                            {% endif %}
+                        </p>
+                        <p class="text-light mb-auto"><span class="text-muted">Adresse IP de l'hébergement :</span><br>
+                            {% if admin == "yes" %}
+                                {{ customer.serverSpe.hostingIp }}
+                            {% else %}
+                                ***.***.**.***
+                            {% endif %}
+                        </p>
+                        <p class="text-light mb-auto"><span class="text-muted">Datacentre :</span><br>
+                            {% if admin == "yes" %}
+                                {{ customer.serverSpe.datacenter }}
+                            {% else %}
+                                *********
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <a href="./" class="mx-auto mt-4"><button class="button-big">Revenir au monitoring</button></a>
+        </div>
+    </div>
 {% endblock %}
