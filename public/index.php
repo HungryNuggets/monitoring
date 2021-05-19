@@ -58,11 +58,13 @@ $ovh = new Api( APP_KEY,
 // ON ADMIN CONNECTION
 if (isset($_SESSION['session_id']) && $_SESSION['session_id'] === session_id()) {
 
+    $admin = 'yes';
     require ROOT.'/controller/admin.controller.php';
 
 // ON USER DEMAND
 } else {
 
+    $admin = 'no';
     require ROOT.'/controller/public.controller.php';
 
 }

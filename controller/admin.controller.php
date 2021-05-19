@@ -32,4 +32,4 @@ if (isset($_GET['disconnection'])) {
     exit();
 }
 
-require  ROOT."/controller/admin/home.admin.controller.php";
+require  ROOT."/controller/public/home.public.controller.php";

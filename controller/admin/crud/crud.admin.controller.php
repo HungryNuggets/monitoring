@@ -73,7 +73,7 @@ if (isset($_POST['adminPwdUpdate'])) {
 // TWIG RENDER
 echo $twig->render("admin/profil_admin.html.twig",
     [
-        "admin"=>'yes',
+        "admin"=>$admin,
         "session"=>$_SESSION,
         "thisAdmin"=>$thisAdmin,
         "warningInfo"=>$warningInfo,

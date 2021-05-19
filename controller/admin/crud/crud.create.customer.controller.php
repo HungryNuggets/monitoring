@@ -23,7 +23,7 @@ if (isset($_POST['createCustomer'])) {
 // TWIG RENDER
 echo $twig->render("admin/crud/create_customer.html.twig",
     [
-        "admin" => 'yes',
+        "admin" => $admin,
         "session" => $_SESSION,
         "warning" => $warning
     ]);

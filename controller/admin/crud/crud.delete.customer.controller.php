@@ -28,7 +28,7 @@ if (isset($_GET['admin']) && $_GET['admin'] == "ok") {
 // TWIG RENDER
 echo $twig->render("admin/crud/delete_customer.html.twig",
     [
-        "admin" => 'yes',
+        "admin" => $admin,
         "session" => $_SESSION,
         "warning" => $warning,
         "customer"=>$customerDisplay

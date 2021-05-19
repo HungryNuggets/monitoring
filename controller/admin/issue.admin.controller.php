@@ -20,7 +20,7 @@ if (isset($_GET['update']) && ctype_digit($_GET['update'])) {
 // TWIG RENDER
 echo $twig->render("admin/issue.html.twig",
     [
-        "admin"=>'yes',
+        "admin"=>$admin,
         "session"=>$_SESSION,
         "allIssue"=>$issueManager->selectAllIssue(),
         "info"=>$info

@@ -28,7 +28,7 @@ if (isset($_GET['profil']) && ctype_digit($_GET['profil'])) {
 // TWIG RENDER
 echo $twig->render("admin/admin.html.twig",
     [
-        "admin"=>'yes',
+        "admin"=>$admin,
         "session"=>$_SESSION,
         "allAdmin"=>$adminManager->selectAllAdmin(),
         "info"=>$info

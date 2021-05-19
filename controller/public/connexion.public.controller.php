@@ -141,4 +141,4 @@ if (isset($_POST['signup'])) {
     }
 
 // TWIG RENDER
-    echo $twig->render("public/connection.html.twig", ["warningSignUp" => $warningSignUp, "warningSignIn" => $warningSignIn, "admin" => 'no']);
+    echo $twig->render("public/connection.html.twig", ["warningSignUp" => $warningSignUp, "warningSignIn" => $warningSignIn, "admin" => $admin]);

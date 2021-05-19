@@ -33,7 +33,7 @@ if (isset($_POST['updateCustomer'])) {
 // TWIG RENDER
 echo $twig->render("admin/crud/update_customer.html.twig",
     [
-        "admin" => 'yes',
+        "admin" => $admin,
         "session" => $_SESSION,
         "warning" => $warning,
         "customer"=>$customerDisplay
