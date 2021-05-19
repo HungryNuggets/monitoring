@@ -7,7 +7,7 @@
 class IssueManager extends ManagerTable {
 
     // NEW ISSUE
-    public function newIssue(Issue $issue, int $idCustomer): bool {
+    public function newIssue(string $desc, int $idCustomer): bool {
 
         // NEW DATE
         $newDate = new DateTime();
@@ -17,7 +17,7 @@ class IssueManager extends ManagerTable {
         $prepare = $this->db->prepare($sql);
 
         $prepare->bindValue(1, $newDate->format("Y-m-d H:i:s"), PDO::PARAM_STR);
-        $prepare->bindValue(2, $issue->getDescIssue(), PDO::PARAM_STR);
+        $prepare->bindValue(2, $desc, PDO::PARAM_STR);
         $prepare->bindValue(3, 2, PDO::PARAM_INT);
         $prepare->bindValue(4, $idCustomer, PDO::PARAM_INT);
 
@@ -78,6 +78,34 @@ class IssueManager extends ManagerTable {
 
         // IF NOT
         return [];
+    }
+
+    // SELECT THE ONGOING ISSUES
+    public function ongoingIssue(int $id_customer) : bool {
+        $sql = "SELECT * FROM issue WHERE customer_id_customer = ? AND status_issue = ?";
+        $prepare = $this->db->prepare($sql);
+
+        try {
+
+            $prepare->execute([$id_customer,2]);
+
+            // IF THERE IS A RESULT
+            if ($prepare->rowCount()) {
+
+                return true;
+
+                // IF NOT
+            } else {
+                return false;
+            }
+
+        } catch (Exception $e) {
+
+            trigger_error($e->getMessage());
+            // IF NOT
+            return false;
+
+        }
     }
 
 }

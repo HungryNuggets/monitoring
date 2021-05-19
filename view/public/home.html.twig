@@ -9,7 +9,29 @@
                     <h2 class="">{{ customer.name_customer }} </h2>
                 </div>
                 <em class="">{{ customer.domain_customer }}</em>
-                <p>{{ customer.test }}</p>
+                <p>
+                    {% if customer.DNS == true %}
+                        DNS : ✔
+                    {% elseif customer.DNS == false %}
+                        DNS : ✗
+                    {% endif %}
+                    {% if customer.server == true %}
+                        || Server : ✔
+                    {% elseif customer.server == false %}
+                        || Server : ✗
+                    {% endif %}
+                    <br>
+                    {% if customer.domain == true %}
+                         Expiration nom de domaine : {{ customer.domain }}
+                    {% elseif customer.domain == false %}
+                        Nom de domaine : <br>✗
+                    {% endif %}
+                </p>
+                {% if customer.DNS == true and customer.server == true and customer.domain == true %}
+                <img src="img/content/nuggets-ok.png" alt="Hungry Nuggets vert">
+                {% else %}
+                <img src="img/content/nuggets-red.png" alt="Hungry Nuggets rouge">
+                {% endif %}
                 <a href="?customer={{ customer.id_admin }}"><button>Voir les détails</button></a>
             </div>
         {% endfor %}

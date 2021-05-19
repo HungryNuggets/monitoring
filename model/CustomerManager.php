@@ -127,4 +127,91 @@ class CustomerManager extends ManagerTable {
         }
 
     }
+
+    // DNS STATUS WITH OVH API
+    public function dnsStatus($ovh, string $domain,int $idCustomer,IssueManager $issueManager) : bool {
+
+        try {
+            // API
+            return $ovh->get('/domain/zone/'.$domain.'/status')['isDeployed'];
+
+            // IF SOMETHING WRONG
+        } catch (GuzzleHttp\Exception\ClientException $e) {
+
+            // CHECK IF THERE IS ONGOING ISSUE FOR THIS CUSTOMER
+            $ongoingIssue = $issueManager->ongoingIssue($idCustomer);
+
+            // IF THERE IS
+            if ($ongoingIssue) {
+
+                return false;
+
+                // IF NOT
+            } else {
+
+                // NEW ISSUE
+                $issueManager->newIssue("DNS down", $idCustomer);
+                return false;
+
+            }
+        }
+    }
+
+    // SERVER STATUS WITH OVH API
+    public function serverStatus($ovh, string $domain,int $idCustomer,IssueManager $issueManager) : bool {
+
+        try {
+            // API
+            return $ovh->get('/domain/zone/'.$domain.'/serviceInfos')['status'];
+
+            // IF SOMETHING WRONG
+        } catch (GuzzleHttp\Exception\ClientException $e) {
+
+            // CHECK IF THERE IS ONGOING ISSUE FOR THIS CUSTOMER
+            $ongoingIssue = $issueManager->ongoingIssue($idCustomer);
+
+            // IF THERE IS
+            if ($ongoingIssue) {
+
+                return false;
+
+                // IF NOT
+            } else {
+
+                // NEW ISSUE
+                $issueManager->newIssue("Server down", $idCustomer);
+                return false;
+
+            }
+        }
+    }
+
+    // SERVER STATUS WITH OVH API
+    public function domainStatus($ovh, string $domain,int $idCustomer,IssueManager $issueManager) : string {
+
+        try {
+            // API
+            return $ovh->get('/domain/zone/'.$domain.'/serviceInfos')['expiration'];
+
+            // IF SOMETHING WRONG
+        } catch (GuzzleHttp\Exception\ClientException $e) {
+
+            // CHECK IF THERE IS ONGOING ISSUE FOR THIS CUSTOMER
+            $ongoingIssue = $issueManager->ongoingIssue($idCustomer);
+
+            // IF THERE IS
+            if ($ongoingIssue) {
+
+                return "";
+
+                // IF NOT
+            } else {
+
+                // NEW ISSUE
+                $issueManager->newIssue("Domain name related problem", $idCustomer);
+                return "";
+
+            }
+        }
+    }
 }
