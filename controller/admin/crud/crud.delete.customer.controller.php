@@ -15,7 +15,7 @@ if (isset($_GET['delete']) && ctype_digit($_GET['delete'])){
 
 // IF THE ADMIN REALLY WANT TO DELETE
 if (isset($_GET['admin']) && $_GET['admin'] == "ok") {
-    Echo "HELLO";
+
     $delete = $customerManager->deleteCustomer($customerToChange);
     if ($delete) {
         header('Location: ?customer');

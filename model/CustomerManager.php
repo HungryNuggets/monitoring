@@ -110,14 +110,24 @@ class CustomerManager extends ManagerTable {
 
     public function deleteCustomer(int $idCustomer) : bool {
 
-        $sql = "DELETE FROM customer WHERE id_customer= ?";
-        $prepare = $this->db->prepare($sql);
+        // PREPARE DELETION FOR ISSUES
+        $sqlIssue = "DELETE FROM issue WHERE customer_id_customer= ?";
+        $prepareIssue = $this->db->prepare($sqlIssue);
+        // PREPARE DELETION FOR CUSTOMER
+        $sqlCustomer = "DELETE FROM customer WHERE id_customer= ?";
+        $prepareCustomer = $this->db->prepare($sqlCustomer);
 
         try {
 
-            $prepare->execute([$idCustomer]);
+            // TRANSACTION
+            $this->db->beginTransaction();
+
+            $prepareIssue->execute([$idCustomer]);
+
+            $prepareCustomer->execute([$idCustomer]);
 
             // IF OKAY
+            $this->db->commit();
             return true;
 
         } catch (Exception $e) {
@@ -125,6 +135,7 @@ class CustomerManager extends ManagerTable {
             trigger_error($e->getMessage());
 
             // IF NOT
+            $this->db->rollBack();
             return false;
         }
 
