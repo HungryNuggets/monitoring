@@ -1,9 +1,9 @@
 -- MySQL Workbench Synchronization
--- Generated: 2021-05-03 13:47
+-- Generated: 2021-05-19 11:00
 -- Model: New Model
 -- Version: 1.0
 -- Project: Name of the project
--- Author: Audrey :)
+-- Author: Audrey
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
@@ -12,10 +12,14 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 ALTER TABLE `monitoring_hungry_nuggets`.`issue` 
 DROP FOREIGN KEY `fk_issue_customer`;
 
+ALTER TABLE `monitoring_hungry_nuggets`.`customer` 
+ADD COLUMN `hosting_customer` VARCHAR(200) NOT NULL AFTER `domain_customer`;
+
+ALTER TABLE `monitoring_hungry_nuggets`.`admin` 
+CHANGE COLUMN `status_admin` `status_admin` TINYINT(4) NOT NULL COMMENT '1 -> Validated by an admin or 2 -> Not yet validated by an admin ' ;
+
 ALTER TABLE `monitoring_hungry_nuggets`.`issue` 
-CHANGE COLUMN `timestamp_issue` `timestamp_issue` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Timestamps of the issue' ,
-CHANGE COLUMN `desc_issue` `desc_issue` VARCHAR(200) NOT NULL COMMENT 'Description of the issue' ,
-CHANGE COLUMN `admin_id_admin` `admin_id_admin` INT(11) NULL DEFAULT NULL COMMENT 'Id of the admin taking the issue in charge' ;
+CHANGE COLUMN `customer_id_customer` `customer_id_customer` INT(10) UNSIGNED NOT NULL COMMENT 'Customer who\'s domain is linked with the issue' ;
 
 ALTER TABLE `monitoring_hungry_nuggets`.`issue` 
 ADD CONSTRAINT `fk_issue_customer`

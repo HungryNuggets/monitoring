@@ -6,9 +6,10 @@
         {% for customer in allCustomer %}
             <div class="p-2 monitoring-card">
                 <div>
-                    <h2 class="">{{ customer.name_customer }} </h2>
+                    <h2>{{ customer.name_customer }} </h2>
                 </div>
-                <em class="">{{ customer.domain_customer }}</em>
+                <br>
+                <em>{{ customer.domain_customer }}</em>
                 <p>
                     {% if customer.DNS == true %}
                         DNS : ✔
@@ -32,7 +33,7 @@
                 {% else %}
                 <img src="img/content/nuggets-red.png" alt="Hungry Nuggets rouge">
                 {% endif %}
-                <a href="?customer={{ customer.id_admin }}"><button>Voir les détails</button></a>
+                <a href="?customer={{ customer.id_customer }}"><button>Voir les détails</button></a>
             </div>
         {% endfor %}
     </div>

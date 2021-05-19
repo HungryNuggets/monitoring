@@ -203,7 +203,7 @@ class AdminManager extends ManagerTable
     }
 
     // UPDATE ADMIN'S MAIN INFOS
-    function updateAdminInfos(Admin $admin): bool
+    public function updateAdminInfos(Admin $admin): bool
     {
 
         $sql = "UPDATE admin SET nickname_admin= ?, mail_admin= ? WHERE id_admin= ?; ";
@@ -232,7 +232,7 @@ class AdminManager extends ManagerTable
     }
 
     // UPDATE ADMIN'S PASSWORD
-    function updateAdminPassword(Admin $admin): bool
+    public function updateAdminPassword(Admin $admin): bool
     {
 
         // PASSWORD CRYPT
@@ -261,7 +261,7 @@ class AdminManager extends ManagerTable
     }
 
     // UPDATE ADMIN'S STATUS
-    function updateAdminStatus(int $idAdmin): bool
+    public function updateAdminStatus(int $idAdmin): bool
     {
 
         $sql = "UPDATE admin SET status_admin= ? WHERE id_admin= ?; ";
@@ -287,7 +287,7 @@ class AdminManager extends ManagerTable
     }
 
     // UPDATE ADMIN'S VALIDATION STATUS
-    function updateAdminValidationStatus(string $admin, string $key): bool
+    public function updateAdminValidationStatus(string $admin, string $key): bool
     {
 
         $sql = "UPDATE admin SET validation_status_admin= ? WHERE nickname_admin= ? AND confirmation_key_admin = ?; ";

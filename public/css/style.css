@@ -360,7 +360,7 @@ label {
     border: 1px solid #0E101D;
     border-radius: 20px;
     background-color: #0E101D;
-    height: 160px;
+    height: 290px;
     margin: 25px 35px;
     text-align: center;
 }
@@ -385,4 +385,17 @@ label {
 .monitoring-card em {
     opacity: 0.7;
     letter-spacing: 1px;
+}
+
+.monitoring-card img {
+    width: 160px;
+    height: auto;
+    position : relative;
+    bottom : 45px;
+    left: 90px;
+}
+
+.monitoring-card a {
+    position: relative;
+    bottom: 110px;
 }

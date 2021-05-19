@@ -10,6 +10,7 @@ class Customer extends MappingTable {
     protected int $id_customer;
     protected string $name_customer;
     protected string $domain_customer;
+    protected string $hosting_customer;
     protected string $contact_person_customer;
     protected string $mail_customer;
     protected string $phone_customer;
@@ -38,6 +39,14 @@ class Customer extends MappingTable {
      */
     public function getDomainCustomer(): string {
         return $this->domain_customer;
+    }
+
+    /**
+     * $hosting_customer's getter
+     * @return string
+     */
+    public function getHostingCustomer(): string {
+        return $this->hosting_customer;
     }
 
     /**
@@ -106,6 +115,21 @@ class Customer extends MappingTable {
             trigger_error("The domain name can't be longer than 140 characters", E_USER_NOTICE);
         } else {
             $this->domain_customer = $domain_customer;
+        }
+    }
+
+    /**
+     * $hosting_customer's setter
+     * @param string $hosting_customer
+     */
+    public function setHostingCustomer(string $hosting_customer): void {
+        $hosting_customer = strip_tags(trim($hosting_customer));
+        if (empty($hosting_customer)) {
+            trigger_error("The hosting name can't be empty", E_USER_NOTICE);
+        } elseif (strlen($hosting_customer) > 200) {
+            trigger_error("The hosting name can't be longer than 200 characters", E_USER_NOTICE);
+        } else {
+            $this->hosting_customer = $hosting_customer;
         }
     }
 
