@@ -15,7 +15,7 @@ if (isset($_GET['update']) && ctype_digit($_GET['update'])){
 // ON FORM SUBMISSION
 if (isset($_POST['updateCustomer'])) {
 
-    if (empty($_POST['name_customer']) || empty($_POST['domain_customer']) || empty($_POST['contact_person_customer']) || empty($_POST['mail_customer']) || empty($_POST['phone_customer'])) {
+    if (empty($_POST['name_customer']) || empty($_POST['domain_customer']) || empty($_POST['hosting_customer']) || empty($_POST['contact_person_customer']) || empty($_POST['mail_customer']) || empty($_POST['phone_customer'])) {
         $warning .= "Remplissez tout les champs pour mettre à jour un client";
     } else {
         // UPDATE

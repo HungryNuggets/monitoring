@@ -18,7 +18,7 @@
                 <thead>
                 <tr>
                     <th scope="col">Nom de l'entreprise</th>
-                    <th scope="col">Nom de domaine</th>
+                    <th scope="col">Nom de domaine &<br> Nom de l'hébergement</th>
                     <th scope="col">Personne de contact</th>
                     <th scope="col">E-mail de contact</th>
                     <th scope="col">Téléphone de contact</th>
@@ -29,7 +29,7 @@
                 {% for customer in allCustomer %}
                     <tr>
                         <td>{{ customer.name_customer }}</td>
-                        <td>{{ customer.domain_customer }}</td>
+                        <td>{{ customer.domain_customer }}<br>{{  customer.hosting_customer }}</td>
                         <td>{{ customer.contact_person_customer }}</td>
                         <td>{{ customer.mail_customer }}</td>
                         <td>{{ customer.phone_customer }}</td>
