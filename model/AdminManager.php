@@ -183,6 +183,27 @@ class AdminManager extends ManagerTable
         }
     }
 
+    // SELECT HALF VALIDATED ADMIN
+    public function selectHalfValidatedAdmins(): int
+    {
+        $sql = "SELECT mail_admin FROM admin WHERE status_admin = ? AND validation_status_admin = ? ;";
+        $prepare = $this->db->prepare($sql);
+
+        try {
+
+            $prepare->execute([2, 1]);
+
+            // RETURN THE NUMBER OF ADMIN WAITING FOR VALIDATION
+            return $prepare->rowCount();
+
+        } catch (Exception $e) {
+
+            trigger_error($e->getMessage());
+            // IF NOT
+            return 0;
+        }
+    }
+
     // DISCONNECTION
     public static function disconnection(): bool
     {

@@ -24,6 +24,8 @@ if (isset($_POST['createCustomer'])) {
 echo $twig->render("admin/crud/create_customer.html.twig",
     [
         "admin" => $admin,
+        "issueNotification"=>$issuesNotification ,
+        "adminNotification"=>$adminNotification ,
         "session" => $_SESSION,
         "warning" => $warning
     ]);

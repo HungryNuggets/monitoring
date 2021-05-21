@@ -11,7 +11,7 @@ if (isset($_GET['update']) && ctype_digit($_GET['update'])){
     $updateAdmin = $adminManager->updateAdminStatus($adminToUpdate);
 
     if ($updateAdmin) {
-        header('Refresh:5');
+        header('Location: ?admin');
     } else {
         $info = 'La mise à jour n\'a pas pu se faire';
     }
@@ -29,6 +29,8 @@ if (isset($_GET['profil']) && ctype_digit($_GET['profil'])) {
 echo $twig->render("admin/admin.html.twig",
     [
         "admin"=>$admin,
+        "issueNotification"=>$issuesNotification ,
+        "adminNotification"=>$adminNotification ,
         "session"=>$_SESSION,
         "allAdmin"=>$adminManager->selectAllAdmin(),
         "info"=>$info

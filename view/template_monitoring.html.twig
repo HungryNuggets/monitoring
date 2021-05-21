@@ -30,10 +30,18 @@
                             <a class="nav-look" href="?customer"> Clients </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-look" href="?issue"> Historique </a>
+                            <a class="nav-look" href="?issue"> Historique
+                                {% if issueNotification >= 1 %}
+                                <span class="btn btn-warning notification">{{ issueNotification }}</span>
+                                {% endif %}
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-look" href="?admin"> Administrateurs </a>
+                            <a class="nav-look" href="?admin"> Administrateurs
+                                {% if adminNotification >= 1 %}
+                                <span class="btn btn-warning notification">{{ adminNotification }}</span>
+                                {% endif %}
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-look" href="?disconnection"> Déconnexion </a>

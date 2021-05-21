@@ -80,6 +80,16 @@ class IssueManager extends ManagerTable {
         return [];
     }
 
+    // SELECT ONGOING ISSUES
+    public function selectOngoingIssue() : int {
+        $sql = "SELECT * FROM issue 
+                WHERE status_issue = 2;";
+        $query = $this->db->query($sql);
+
+        // RETURN THE NUMBER OF ONGOING ISSUES
+        return $query->rowCount();
+    }
+
     // SELECT THE ONGOING ISSUES
     public function ongoingIssue(int $id_customer) : bool {
         $sql = "SELECT * FROM issue WHERE customer_id_customer = ? AND status_issue = ?";

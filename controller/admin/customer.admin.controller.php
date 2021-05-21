@@ -28,6 +28,8 @@ if (isset($_GET['delete']) && ctype_digit($_GET['delete'])){
 echo $twig->render("admin/customer.html.twig",
     [
         "admin"=>$admin,
+        "issueNotification"=>$issuesNotification ,
+        "adminNotification"=>$adminNotification ,
         "session"=>$_SESSION,
         "allCustomer"=>$customerManager->selectAllCustomers()
     ]);

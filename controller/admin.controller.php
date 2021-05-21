@@ -1,5 +1,10 @@
 <?php
 
+// ISSUES NOTIFICATION
+$issuesNotification = $issueManager->selectOngoingIssue();
+// USER WAITING FOR VALIDATION NOTIFICATION
+$adminNotification  = $adminManager->selectHalfValidatedAdmins();
+
 // ADMIN HOME => CUSTOMER LIST
 if (isset($_GET['customer'])){
 

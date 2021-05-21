@@ -30,6 +30,8 @@ echo $twig->render("admin/crud/delete_customer.html.twig",
     [
         "admin" => $admin,
         "session" => $_SESSION,
+        "issueNotification"=>$issuesNotification ,
+        "adminNotification"=>$adminNotification ,
         "warning" => $warning,
         "customer"=>$customerDisplay
     ]);

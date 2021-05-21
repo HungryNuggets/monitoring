@@ -30,5 +30,7 @@ for ($i = 0; $i < count($allCustomer); $i++){
 // TWIG RENDER
 echo $twig->render("public/home.html.twig",[
     "admin"=>$admin,
+    "issueNotification"=>$issuesNotification,
+    "adminNotification"=>$adminNotification,
     "allCustomer"=>$fullCustomerList
 ]);
