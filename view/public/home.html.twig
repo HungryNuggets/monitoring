@@ -6,9 +6,8 @@
         {% for customer in allCustomer %}
             <div class="p-2 monitoring-card">
                 <div>
-                    <h2>{{ customer.name_customer }} </h2>
+                    <a href="{{ customer.domain_customer }}"><h2>{{ customer.name_customer }}</h2></a>
                 </div>
-                <em>{{ customer.domain_customer }}</em>
                 <br>
                 <p>
                     {% if customer.domain == true %}

@@ -361,7 +361,7 @@ label {
     border: 1px solid #0E101D;
     border-radius: 20px;
     background-color: #0E101D;
-    height: 230px;
+    height: 200px;
     margin: 25px 35px;
     text-align: center;
 }
@@ -374,18 +374,19 @@ label {
     right: 25px;
 }
 
-.monitoring-card div h2 {
+.monitoring-card div a {
+    text-decoration: none;
+}
+
+.monitoring-card div a h2 {
     font-size: 1.1em;
     font-weight: 500;
     letter-spacing: 1px;
     text-transform: uppercase;
     color: #0E101D;
     padding: 5px;
-}
-
-.monitoring-card em {
-    opacity: 0.7;
-    letter-spacing: 1px;
+    position: relative;
+    bottom: 95px;
 }
 
 .monitoring-card img {
@@ -398,12 +399,12 @@ label {
 
 .monitoring-card a {
     position: relative;
-    bottom: 145px;
+    bottom: 155px;
 }
 
 .monitoring-card p {
     text-align: left;
-    margin: 15px auto 0 65px;
+    margin: -5px auto 0 65px;
 }
 
 .notification {
