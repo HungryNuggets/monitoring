@@ -17,6 +17,7 @@ $fullCustomerList = [];
 // SIMPLE LIST OF ALL CUSTOMERS
 $allCustomer = $customerManager->selectAllCustomers();
 
+// OVH INFOS VIA API
 for ($i = 0; $i < count($allCustomer); $i++){
     $fullCustomerList[$i] = $allCustomer[$i];
     // DNS

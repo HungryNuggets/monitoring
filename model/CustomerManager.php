@@ -68,7 +68,7 @@ class CustomerManager extends ManagerTable {
     // SELECT ALL CUSTOMERS
     public function selectAllCustomers(): array {
 
-        $sql = "SELECT * FROM customer ORDER BY domain_customer ASC;";
+        $sql = "SELECT * FROM customer ORDER BY name_customer ASC;";
         $query = $this->db->query($sql);
 
         // IF THERE IS AT LEAST 1 RESULT
