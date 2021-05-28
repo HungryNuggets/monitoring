@@ -119,7 +119,7 @@ if (isset($_POST['signup'])) {
 
             // SET MAIL BODY
             $messageRegistration->setBody(
-                MailManager::mailValidation(["user"=>$_GET['user'],"imgTop"=>$imageMain,"imgText"=>$imageText,"imgBottom"=>$imageFooter]),
+                MailManager::mailGeneric(["user"=>$_GET['user'],"imgTop"=>$imageMain,"imgText"=>$imageText,"imgBottom"=>$imageFooter]),
                 'text/html'
             );
 

@@ -12,8 +12,33 @@ if (isset($_GET['update']) && ctype_digit($_GET['update'])){
 
     if ($updateAdmin) {
 
+        // ADMIN LIST
+        $admins = $adminManager->selectValidatedAdmins();
+            $adminList= [];
+            foreach ($admins as $admin) {
+                $adminList[] = $admin['mail_admin'];
+            }
 
+        // MAIL FOR CONFIRMATION
+        $mailUpdateAdmin = new Swift_Mailer($transport);
+        $messageUpdateAdmin = (new Swift_Message('Votre compte a été validé || Monitoring Hungry Nuggets'))
+            ->setFrom([MAIL_ADDRESS => 'Hungry Nuggets'])
+            ->setTo($adminList);
+
+        // IMAGES
+        $imageMain = $messageUpdateAdmin->embed(Swift_Image::fromPath('img/mails/entete-mail.jpg'));
+        $imageText = $messageUpdateAdmin->embed(Swift_Image::fromPath('img/mails/update-admin.png'));
+        $imageFooter = $messageUpdateAdmin->embed(Swift_Image::fromPath('img/mails/bottom-mail.png'));
+
+        // SET MAIL BODY
+        $messageUpdateAdmin->setBody(
+            MailManager::mailGeneric(["user"=>$_GET['user'],"imgTop"=>$imageMain,"imgText"=>$imageText,"imgBottom"=>$imageFooter]),
+            'text/html'
+        );
+
+        $mailUpdateAdmin->send($messageUpdateAdmin);
         header('Location: ?admin');
+
     } else {
         $info = 'La mise à jour n\'a pas pu se faire';
     }
