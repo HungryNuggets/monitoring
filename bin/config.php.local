@@ -1,0 +1,29 @@
+<?php
+
+// Copy/paste on a new file (config.php) and fill it with all the info needed.
+
+// DB
+const DB_TYPE = '';
+const DB_HOST = '';
+const DB_USER = '';
+const DB_PASSWORD = '';
+const DB_NAME = '';
+const DB_PORT = '';
+const DB_CHARSET = '';
+
+// DEVELOPMENT ENVIRONMENT
+define("ENV_DEV", true);
+
+// SWIFTMAILER
+define("MAIL_ADDRESS", "");
+define("MAIL_PWD", "");
+define("MAIL_SMTP", 'smtp.gmail.com');
+define("MAIL_PORT", 587);
+define("MAIL_ENCRYPTION", 'TLS');
+
+// CONST OVH API
+define('APP_KEY', '');
+define('APP_SECRET','');
+define('CON_KEY','');
+define('END_POINT', '');
+define('REDIRECT', '');

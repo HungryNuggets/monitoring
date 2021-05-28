@@ -1,0 +1,46 @@
+{% extends "template_monitoring.html.twig" %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+
+            <h1 class="yellow w-100 text-center mx-auto title">Clients</h1>
+            <p class="w-100 text-center mx-auto white letter-spacing">Hello {{ session.nickname_admin }} !<br> Ici tu trouveras la liste des clients qui font l'objet du monitoring</p>
+            <div class="container-sm  align-center mx-auto">
+                <a href="?customer&create"><button class="button-big">Ajouter un client</button></a>
+            </div>
+
+        </div>
+        <div class="row mt-4 mb-4">
+
+            <table class="table mb-5">
+                <thead>
+                <tr>
+                    <th scope="col">Nom de l'entreprise</th>
+                    <th scope="col">Nom de domaine &<br> Nom de l'hébergement</th>
+                    <th scope="col">Personne de contact</th>
+                    <th scope="col">E-mail de contact</th>
+                    <th scope="col">Téléphone de contact</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for customer in allCustomer %}
+                    <tr>
+                        <td>{{ customer.name_customer }}</td>
+                        <td>{{ customer.domain_customer }}<br>{{  customer.hosting_customer }}</td>
+                        <td>{{ customer.contact_person_customer }}</td>
+                        <td>{{ customer.mail_customer }}</td>
+                        <td>{{ customer.phone_customer }}</td>
+                        <td class="w-25"><a href="?customer&update={{ customer.id_customer }}"><button>Modifier</button></a><a
+                                    href="?customer&delete={{ customer.id_customer }}"><button>Supprimer</button></a></td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "template_monitoring.html.twig" %}
+
+{% block content %}
+
+    <div class="container d-flex justify-content-around p-2 align-items-center align-self-center flex-wrap flex-row">
+        {% for customer in allCustomer %}
+            <div class="p-2 monitoring-card">
+                <div>
+                    <a href="{{ customer.domain_customer }}"><h2>{{ customer.name_customer }}</h2></a>
+                </div>
+                <br>
+                <p>
+                    {% if customer.domain == true %}
+                        Domain : ✔
+                    {% elseif customer.domain == false %}
+                        Domain : ✗
+                    {% endif %}
+                    <br>
+                    {% if customer.DNS == true %}
+                        DNS : ✔
+                    {% elseif customer.DNS == false %}
+                        DNS : ✗
+                    {% endif %}
+                    <br>
+                    {% if customer.server == true %}
+                        Server : ✔
+                    {% elseif customer.server == false %}
+                        Server : ✗
+                    {% endif %}
+                </p>
+                {% if customer.DNS == true and customer.server == true and customer.domain == true %}
+                <img src="img/content/nuggets-ok.png" alt="Hungry Nuggets vert">
+                {% else %}
+                <img src="img/content/nuggets-red.png" alt="Hungry Nuggets rouge">
+                {% endif %}
+                <a href="?customerDetail={{ customer.id_customer }}"><button>Voir les détails</button></a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

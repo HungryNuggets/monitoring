@@ -1,0 +1,17 @@
+{# Main twig template #}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="robots" content="noindex">
+        <meta name="googlebot" content="noindex">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{% block title %}{% endblock %}</title>
+        {% block meta %}{% endblock %}
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body id="top">
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

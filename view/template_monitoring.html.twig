@@ -1,0 +1,68 @@
+{% extends "template_base.html.twig" %}
+{# STYLESHEETS #}
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@500&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css" media="screen">
+{% endblock %}
+
+{% block body %}
+    {% block header %}
+        <nav class="navbar navbar-expand-lg navbar-dark background-dark">
+            <a class="navbar-brand" href="https://hungrynuggets.com" target="_blank"><img class="main-img" src="img/logos/white-hungry-nuggets.png" alt="Hungry Nuggets"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav nav justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-look" href="./"> Monitoring </a>
+                    </li>
+                    {% if admin == "no" %}
+                    <li class="nav-item">
+                        <a class="nav-look" href="?connection"> Connexion </a>
+                    </li>
+                    {% endif %}
+                    {% if admin == "yes" %}
+                        <li class="nav-item">
+                            <a class="nav-look" href="?customer"> Clients </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-look" href="?issue"> Historique
+                                {% if issueNotification >= 1 %}
+                                <span class="btn btn-warning notification">{{ issueNotification }}</span>
+                                {% endif %}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-look" href="?admin"> Administrateurs
+                                {% if adminNotification >= 1 %}
+                                <span class="btn btn-warning notification">{{ adminNotification }}</span>
+                                {% endif %}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-look" href="?disconnection"> Déconnexion </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    {% endblock %}
+    {% block content %}{% endblock %}
+    {% block footer %}
+        <div class="back-to-top-wrapper">
+            <a href="#top" class="back-to-top-link" aria-label="Scroll to Top">▲</a>
+        </div>
+        <div class="footer">
+            <p>©2020 <a href="https://hungrynuggets.com" target="_blank">Hungry Nuggets</a>. All rights reserved.</p>
+        </div>
+    {% endblock %}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+{% endblock %}
