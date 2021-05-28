@@ -11,6 +11,8 @@ if (isset($_GET['update']) && ctype_digit($_GET['update'])){
     $updateAdmin = $adminManager->updateAdminStatus($adminToUpdate);
 
     if ($updateAdmin) {
+
+
         header('Location: ?admin');
     } else {
         $info = 'La mise à jour n\'a pas pu se faire';
