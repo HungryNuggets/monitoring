@@ -55,4 +55,26 @@ class MailManager {
                 </html>';
     }
 
+    // MAIL ON NEW ISSUE
+    static public function mailIssue(array $array): string {
+        return ' <html lang="fr"> ' .
+            '<body> ' .
+            '<link href="https://fonts.googleapis.com/css2?family=Dosis:wght@300;500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">' .
+            '<div style="background-color: #fff; width: 100%; height: auto;padding: 50px 0 0 0;font-family: \'Montserrat\', sans-serif; color : #fff;">
+                        <div style="background-color: #111C30; width: 80%;max-width: 700px; height: auto; margin:50px auto; ">
+                        <img alt="Hungry Nuggets" src="' . $array['imgTop'] . '" style="width: 100%;">
+                            <br>
+                            <img style="width: 80%;margin: 0 auto; text-align: center; display: flex;" src="'. $array['imgText'] .'" alt="new admin">
+                           
+                           <div style="margin: 0 auto;width: 68%; text-align: center;">
+                                <a href="https://monitoring.hungrynuggets.com/?issue" style="text-decoration: none;"><button style=" border-radius: 40px; border: 1px solid #F4CA34; background: #F4CA34; color: #fff; font-size: 1.1em; font-weight: 400; padding: 8px 45px; letter-spacing: 1px; text-transform: uppercase; margin-top:25px; font-family: \'Dosis\', \'Montserrat\',sans-serif;">GO</button></a>
+                            </div>
+                            <img alt="Hungry Nuggets" src="' . $array['imgBottom'] . '" style="width: 40%; margin : 85px auto 100px auto;padding-bottom:100px;text-align: center; display: flex;">
+                        </div>
+                        <p style="font-size: 0.6em; letter-spacing: 1px; text-align: center; color : #111">HUNGRY NUGGETS © 2021 Hungry Nuggets, All rights reserved.</p>
+                        </div>
+                    </body>
+                </html>';
+    }
+
 }

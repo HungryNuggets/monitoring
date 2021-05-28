@@ -318,20 +318,22 @@ class CustomerManager extends ManagerTable {
         }
 
         // MAIL FOR CONFIRMATION
-        $mailRegistration = new Swift_Mailer($transport);
-        $messageRegistration = (new Swift_Message('Nouveau soucis détecté'))
+        $mail = new Swift_Mailer($transport);
+        $message = (new Swift_Message('Nouveau soucis détecté sur le monitoring Hungry Nuggets'))
             ->setFrom([MAIL_ADDRESS => 'Hungry Nuggets'])
             ->setTo($adminList);
 
         // IMAGES
-        $imageMain = $messageRegistration->embed(Swift_Image::fromPath('img/mails/entete-mail.jpg'));
-        $imageText = $messageRegistration->embed(Swift_Image::fromPath('img/mails/new-user.png'));
-        $imageFooter = $messageRegistration->embed(Swift_Image::fromPath('img/mails/bottom-mail.png'));
+        $imageMain = $message->embed(Swift_Image::fromPath('img/mails/entete-mail.jpg'));
+        $imageText = $message->embed(Swift_Image::fromPath('img/mails/new-issue.png'));
+        $imageFooter = $message->embed(Swift_Image::fromPath('img/mails/bottom-mail.png'));
 
         // SET MAIL BODY
-        $messageRegistration->setBody(
-            MailManager::mailGeneric(["imgTop"=>$imageMain,"imgText"=>$imageText,"imgBottom"=>$imageFooter]),
+        $message->setBody(
+            MailManager::mailIssue(["imgTop"=>$imageMain,"imgText"=>$imageText,"imgBottom"=>$imageFooter]),
             'text/html'
         );
+
+        $mail->send($message);
     }
 }
