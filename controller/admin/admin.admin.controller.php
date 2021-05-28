@@ -28,7 +28,7 @@ if (isset($_GET['update']) && ctype_digit($_GET['update'])){
 
         // SET MAIL BODY
         $messageUpdateAdmin->setBody(
-            MailManager::mailGeneric(["user"=>$_GET['user'],"imgTop"=>$imageMain,"imgText"=>$imageText,"imgBottom"=>$imageFooter]),
+            MailManager::mailGeneric(["imgTop"=>$imageMain,"imgText"=>$imageText,"imgBottom"=>$imageFooter]),
             'text/html'
         );
 

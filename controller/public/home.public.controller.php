@@ -25,7 +25,7 @@ for ($i = 0; $i < count($allCustomer); $i++){
     // SERVER
     $fullCustomerList[$i]['server'] =  $customerManager->serverStatus($ovh, $allCustomer[$i]['hosting_customer'],$allCustomer[$i]['id_customer'], $issueManager);
     // DOMAIN
-    $fullCustomerList[$i]['domain'] =  $customerManager->domainStatus($ovh, $allCustomer[$i]['domain_customer'],$allCustomer[$i]['id_customer'], $issueManager);
+    $fullCustomerList[$i]['domain'] =  $customerManager->domainStatus($ovh, $transport, $allCustomer[$i]['domain_customer'],$allCustomer[$i]['id_customer'], $issueManager);
 }
 
 // TWIG RENDER

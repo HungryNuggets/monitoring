@@ -164,6 +164,7 @@ class CustomerManager extends ManagerTable {
 
                 // NEW ISSUE
                 $issueManager->newIssue("DNS down", $idCustomer);
+                // NEW MAIL
                 return false;
 
             }
@@ -246,7 +247,7 @@ class CustomerManager extends ManagerTable {
     }
 
     // DOMAIN STATUS WITH OVH API
-    public function domainStatus($ovh, string $domain,int $idCustomer,IssueManager $issueManager) : bool {
+    public function domainStatus($ovh, $transport, string $domain,int $idCustomer,IssueManager $issueManager) : bool {
 
         try {
             // API
@@ -271,6 +272,8 @@ class CustomerManager extends ManagerTable {
 
                     // NEW ISSUE
                     $issueManager->newIssue("Domain related problem", $idCustomer);
+                    // MAIL
+                    self::mailOnIssue($transport);
                     return false;
 
                 }
@@ -298,5 +301,33 @@ class CustomerManager extends ManagerTable {
             return [];
 
         }
+    }
+
+    // MAIL ON NEW ISSUE
+    private function mailOnIssue($transport) {
+
+        $adminManager = new AdminManager($this->db);
+        $admins = $adminManager->selectValidatedAdmins();
+        $adminList= [];
+        foreach ($admins as $admin) {
+            $adminList[] = $admin['mail_admin'];
+        }
+
+        // MAIL FOR CONFIRMATION
+        $mailRegistration = new Swift_Mailer($transport);
+        $messageRegistration = (new Swift_Message('Nouveau soucis détecté'))
+            ->setFrom([MAIL_ADDRESS => 'Hungry Nuggets'])
+            ->setTo($adminList);
+
+        // IMAGES
+        $imageMain = $messageRegistration->embed(Swift_Image::fromPath('img/mails/entete-mail.jpg'));
+        $imageText = $messageRegistration->embed(Swift_Image::fromPath('img/mails/new-user.png'));
+        $imageFooter = $messageRegistration->embed(Swift_Image::fromPath('img/mails/bottom-mail.png'));
+
+        // SET MAIL BODY
+        $messageRegistration->setBody(
+            MailManager::mailGeneric(["imgTop"=>$imageMain,"imgText"=>$imageText,"imgBottom"=>$imageFooter]),
+            'text/html'
+        );
     }
 }
