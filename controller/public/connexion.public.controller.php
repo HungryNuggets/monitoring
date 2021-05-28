@@ -100,6 +100,7 @@ if (isset($_POST['signup'])) {
 
         if ($registration){
 
+            $admin = "no";
             $admins = $adminManager->selectValidatedAdmins();
             $adminList= [];
             foreach ($admins as $admin) {

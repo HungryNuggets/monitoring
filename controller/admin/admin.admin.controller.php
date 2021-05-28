@@ -12,18 +12,14 @@ if (isset($_GET['update']) && ctype_digit($_GET['update'])){
 
     if ($updateAdmin) {
 
-        // ADMIN LIST
-        $admins = $adminManager->selectValidatedAdmins();
-            $adminList= [];
-            foreach ($admins as $admin) {
-                $adminList[] = $admin['mail_admin'];
-            }
+        // ADMIN TO CONTACT
+        $adminUpdated = $adminManager->selectOneAdmin($adminToUpdate);
 
         // MAIL FOR CONFIRMATION
         $mailUpdateAdmin = new Swift_Mailer($transport);
         $messageUpdateAdmin = (new Swift_Message('Votre compte a été validé || Monitoring Hungry Nuggets'))
             ->setFrom([MAIL_ADDRESS => 'Hungry Nuggets'])
-            ->setTo($adminList);
+            ->setTo([$adminUpdated['mail_admin']=>$adminUpdated['nickname_admin']]);
 
         // IMAGES
         $imageMain = $messageUpdateAdmin->embed(Swift_Image::fromPath('img/mails/entete-mail.jpg'));
