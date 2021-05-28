@@ -21,9 +21,9 @@ $allCustomer = $customerManager->selectAllCustomers();
 for ($i = 0; $i < count($allCustomer); $i++){
     $fullCustomerList[$i] = $allCustomer[$i];
     // DNS
-    $fullCustomerList[$i]['DNS'] =  $customerManager->dnsStatus($ovh, $allCustomer[$i]['domain_customer'],$allCustomer[$i]['id_customer'], $issueManager);
+    $fullCustomerList[$i]['DNS'] =  $customerManager->dnsStatus($ovh, $transport, $allCustomer[$i]['domain_customer'],$allCustomer[$i]['id_customer'], $issueManager);
     // SERVER
-    $fullCustomerList[$i]['server'] =  $customerManager->serverStatus($ovh, $allCustomer[$i]['hosting_customer'],$allCustomer[$i]['id_customer'], $issueManager);
+    $fullCustomerList[$i]['server'] =  $customerManager->serverStatus($ovh, $transport, $allCustomer[$i]['hosting_customer'],$allCustomer[$i]['id_customer'], $issueManager);
     // DOMAIN
     $fullCustomerList[$i]['domain'] =  $customerManager->domainStatus($ovh, $transport, $allCustomer[$i]['domain_customer'],$allCustomer[$i]['id_customer'], $issueManager);
 }

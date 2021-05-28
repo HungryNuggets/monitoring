@@ -142,7 +142,7 @@ class CustomerManager extends ManagerTable {
     }
 
     // DNS STATUS WITH OVH API
-    public function dnsStatus($ovh, string $domain,int $idCustomer,IssueManager $issueManager) : bool {
+    public function dnsStatus($ovh, $transport, string $domain,int $idCustomer,IssueManager $issueManager) : bool {
 
         try {
             // API
@@ -164,6 +164,8 @@ class CustomerManager extends ManagerTable {
 
                 // NEW ISSUE
                 $issueManager->newIssue("DNS down", $idCustomer);
+                // MAIL
+                self::mailOnIssue($transport);
                 // NEW MAIL
                 return false;
 
@@ -172,7 +174,7 @@ class CustomerManager extends ManagerTable {
     }
 
     // SERVER STATUS WITH OVH API
-    public function serverStatus($ovh, string $hosting,int $idCustomer,IssueManager $issueManager) : bool {
+    public function serverStatus($ovh, $transport, string $hosting,int $idCustomer,IssueManager $issueManager) : bool {
 
         // API
         $apiIncident = $ovh->get('/hosting/web/incident');
@@ -208,6 +210,8 @@ class CustomerManager extends ManagerTable {
 
                 // NEW ISSUE
                 $issueManager->newIssue("Server down", $idCustomer);
+                // MAIL
+                self::mailOnIssue($transport);
                 return false;
 
             }
