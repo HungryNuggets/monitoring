@@ -66,7 +66,7 @@ if (isset($_POST['signup'])) {
 
                 // IMAGES
                 $imageMain = $messageSignUp->embed(Swift_Image::fromPath('img/mails/entete-mail.jpg'));
-                $imageFooter = $messageSignUp->embed(Swift_Image::fromPath('img/mails/bottom-mail.png'));
+                $imageFooter = $messageSignUp->embed(Swift_Image::fromPath('img/mails/big-bottom-mail.png'));
 
                 // SET MAIL BODY
                 $messageSignUp->setBody(
@@ -112,11 +112,12 @@ if (isset($_POST['signup'])) {
 
             // IMAGES
             $imageMain = $messageRegistration->embed(Swift_Image::fromPath('img/mails/entete-mail.jpg'));
+            $imageText = $messageRegistration->embed(Swift_Image::fromPath('img/mails/new-user.png'));
             $imageFooter = $messageRegistration->embed(Swift_Image::fromPath('img/mails/bottom-mail.png'));
 
             // SET MAIL BODY
             $messageRegistration->setBody(
-                MailManager::mailValidation(["user"=>$_GET['user'],"imgTop"=>$imageMain,"imgBottom"=>$imageFooter]),
+                MailManager::mailValidation(["user"=>$_GET['user'],"imgTop"=>$imageMain,"imgBottom"=>$imageFooter,"imgText"=>$imageText]),
                 'text/html'
             );
 

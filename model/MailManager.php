@@ -47,16 +47,13 @@ class MailManager {
     return ' <html lang="fr"> ' .
         '<body> ' .
         '<link href="https://fonts.googleapis.com/css2?family=Dosis:wght@300;500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">' .
-        '<div style="background-color: #fff; width: 100%; height: auto;padding: 50px 0 150px 0;font-family: \'Montserrat\', sans-serif; color : #fff;">
+        '<div style="background-color: #fff; width: 100%; height: auto;padding: 50px 0 0 0;font-family: \'Montserrat\', sans-serif; color : #fff;">
                         <div style="background-color: #111C30; width: 80%;max-width: 700px; height: auto; margin:50px auto; ">
                         <img alt="Hungry Nuggets" src="' . $array['imgTop'] . '" style="width: 100%;">
                             <br>
-                           <h1 style="margin: 60px 60px 35px 60px; color: #fff; font-weight:600; letter-spacing: 1px;">Hello !</h1>
-                            <h3 style="font-family:\'Dosis\', sans-serif; color : #fff;margin: 0 60px;font-weight: 300;font-size:26px;">Le monitoring des sites Hungry Nuggets à accueillis un nouvel utilisateur et il vient de confirmer son adresse e-mail ! <span style="color:#F4CA34;">'.$array['user'].'</span>  est déjà visible dans le tableau de bord et attend le feu vert :)</h3>
-                            <hr style="width: 70% ;border-bottom: 1px solid #F4CA34; margin : 40px auto;">
-                            <div style="text-align: center; width: 100%;">
-                            <img alt="Hungry Nuggets" src="' . $array['imgBottom'] . '" style="width: 40%; margin : 45px auto 100px auto;">
-</div>
+                            <img style="width: 80%;margin: 0 auto; text-align: center; display: flex;" src="'. $array['imgText'] .'" alt="new admin">
+                           
+                            <img alt="Hungry Nuggets" src="' . $array['imgBottom'] . '" style="width: 40%; margin : 85px auto 100px auto;padding-bottom:100px;text-align: center; display: flex;">
                         </div>
                         <p style="font-size: 0.6em; letter-spacing: 1px; text-align: center; color : #111">HUNGRY NUGGETS © 2021 Hungry Nuggets, All rights reserved.</p>
                         </div>
