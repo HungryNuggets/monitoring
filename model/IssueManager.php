@@ -13,7 +13,7 @@ class IssueManager extends ManagerTable {
         $newDate = new DateTime();
 
         // ISSUE INSERT
-        $sql = "INSERT INTO issue (timestamp_issue, desc_issue, status_issue, customer_id_customer) VALUES (?,?,?,?)";
+        $sql = "INSERT INTO monitoring_hungry_nuggets_issue (timestamp_issue, desc_issue, status_issue, customer_id_customer) VALUES (?,?,?,?)";
         $prepare = $this->db->prepare($sql);
 
         $prepare->bindValue(1, $newDate->format("Y-m-d H:i:s"), PDO::PARAM_STR);
@@ -39,7 +39,7 @@ class IssueManager extends ManagerTable {
 
     function updateIssue(int $admin, int $idIssue) : bool {
 
-        $sql = "UPDATE issue SET status_issue = ?, admin_id_admin= ? WHERE id_issue=?; ";
+        $sql = "UPDATE monitoring_hungry_nuggets_issue SET status_issue = ?, admin_id_admin= ? WHERE id_issue=?; ";
         $prepare = $this->db->prepare($sql);
 
         $prepare->bindValue(1, 1, PDO::PARAM_INT);
@@ -64,9 +64,9 @@ class IssueManager extends ManagerTable {
 
     // SELECT ALL ISSUE (ORDER BY)
     public function selectAllIssue() : array {
-        $sql = "SELECT issue.*, customer.*, admin.nickname_admin FROM issue 
-                LEFT JOIN customer ON customer_id_customer = id_customer 
-                LEFT JOIN admin ON admin_id_admin = id_admin
+        $sql = "SELECT issue.*, customer.*, admin.nickname_admin FROM monitoring_hungry_nuggets_issue 
+                LEFT JOIN monitoring_hungry_nuggets_customer ON customer_id_customer = id_customer 
+                LEFT JOIN monitoring_hungry_nuggets_admin ON admin_id_admin = id_admin
                 ORDER BY status_issue DESC,
                 timestamp_issue DESC;";
         $query = $this->db->query($sql);
@@ -82,7 +82,7 @@ class IssueManager extends ManagerTable {
 
     // SELECT ONGOING ISSUES
     public function selectOngoingIssue() : int {
-        $sql = "SELECT * FROM issue 
+        $sql = "SELECT * FROM monitoring_hungry_nuggets_issue 
                 WHERE status_issue = 2;";
         $query = $this->db->query($sql);
 
@@ -92,7 +92,7 @@ class IssueManager extends ManagerTable {
 
     // SELECT THE ONGOING ISSUES
     public function ongoingIssue(int $id_customer) : bool {
-        $sql = "SELECT * FROM issue WHERE customer_id_customer = ? AND status_issue = ?";
+        $sql = "SELECT * FROM monitoring_hungry_nuggets_issue WHERE customer_id_customer = ? AND status_issue = ?";
         $prepare = $this->db->prepare($sql);
 
         try {
