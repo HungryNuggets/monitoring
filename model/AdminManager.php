@@ -17,7 +17,7 @@ class AdminManager extends ManagerTable
         $validationKey = $this->validationKey();
 
         // ADMIN INSERT
-        $sql = "INSERT INTO admin (nickname_admin, pwd_admin, mail_admin, status_admin, confirmation_key_admin, validation_status_admin) VALUES (?,?,?,?,?,?)";
+        $sql = "INSERT INTO monitoring_hungry_nuggets_admin (nickname_admin, pwd_admin, mail_admin, status_admin, confirmation_key_admin, validation_status_admin) VALUES (?,?,?,?,?,?)";
         $prepare = $this->db->prepare($sql);
 
         try {
@@ -46,7 +46,7 @@ class AdminManager extends ManagerTable
     // SELECT DATAS FOR SIGN UP VERIFICATION
     public function selectSignUp(string $mail): array
     {
-        $sql = "SELECT nickname_admin, confirmation_key_admin FROM admin WHERE mail_admin = ? ;";
+        $sql = "SELECT nickname_admin, confirmation_key_admin FROM monitoring_hungry_nuggets_admin WHERE mail_admin = ? ;";
         $request = $this->db->prepare($sql);
         $request->execute([$mail]);
         // IF OKAY
@@ -61,7 +61,7 @@ class AdminManager extends ManagerTable
     public function signIn(Admin $admin): bool
     {
 
-        $query = "SELECT * FROM admin WHERE nickname_admin = ? ;";
+        $query = "SELECT * FROM monitoring_hungry_nuggets_admin WHERE nickname_admin = ? ;";
         $req = $this->db->prepare($query);
         $req->bindValue(1, $admin->getNicknameAdmin(), PDO::PARAM_STR);
 
@@ -89,7 +89,7 @@ class AdminManager extends ManagerTable
     // SIGN IN RIGHTS VERIFICATION
     public function signInRightVerification(Admin $admin): string
     {
-        $sql = "SELECT nickname_admin, status_admin, validation_status_admin FROM admin WHERE nickname_admin = ? ;";
+        $sql = "SELECT nickname_admin, status_admin, validation_status_admin FROM monitoring_hungry_nuggets_admin WHERE nickname_admin = ? ;";
         $req = $this->db->prepare($sql);
         $req->bindValue(1, $admin->getNicknameAdmin(), PDO::PARAM_STR);
         try {
@@ -142,7 +142,7 @@ class AdminManager extends ManagerTable
     public function verifyExistence(string $nickname, string $mail): int
     {
 
-        $sql = "SELECT * FROM admin WHERE nickname_admin = ? OR mail_admin = ?;";
+        $sql = "SELECT * FROM monitoring_hungry_nuggets_admin WHERE nickname_admin = ? OR mail_admin = ?;";
 
         $prepare = $this->db->prepare($sql);
 
@@ -157,7 +157,7 @@ class AdminManager extends ManagerTable
     // SELECT VALIDATED ADMIN
     public function selectValidatedAdmins(): array
     {
-        $sql = "SELECT mail_admin FROM admin WHERE status_admin = ? AND validation_status_admin = ? ;";
+        $sql = "SELECT mail_admin FROM monitoring_hungry_nuggets_admin WHERE status_admin = ? AND validation_status_admin = ? ;";
         $prepare = $this->db->prepare($sql);
 
         try {
@@ -186,7 +186,7 @@ class AdminManager extends ManagerTable
     // SELECT HALF VALIDATED ADMIN
     public function selectHalfValidatedAdmins(): int
     {
-        $sql = "SELECT mail_admin FROM admin WHERE status_admin = ? AND validation_status_admin = ? ;";
+        $sql = "SELECT mail_admin FROM monitoring_hungry_nuggets_admin WHERE status_admin = ? AND validation_status_admin = ? ;";
         $prepare = $this->db->prepare($sql);
 
         try {
@@ -227,7 +227,7 @@ class AdminManager extends ManagerTable
     public function updateAdminInfos(Admin $admin): bool
     {
 
-        $sql = "UPDATE admin SET nickname_admin= ?, mail_admin= ? WHERE id_admin= ?; ";
+        $sql = "UPDATE monitoring_hungry_nuggets_admin SET nickname_admin= ?, mail_admin= ? WHERE id_admin= ?; ";
         $prepare = $this->db->prepare($sql);
 
         $prepare->bindValue(1, $admin->getNicknameAdmin(), PDO::PARAM_STR);
@@ -259,7 +259,7 @@ class AdminManager extends ManagerTable
         // PASSWORD CRYPT
         $cryptPassword = $this->passwordHash($admin->getPwdAdmin());
 
-        $sql = "UPDATE admin SET pwd_admin= ? WHERE id_admin= ?; ";
+        $sql = "UPDATE monitoring_hungry_nuggets_admin SET pwd_admin= ? WHERE id_admin= ?; ";
         $prepare = $this->db->prepare($sql);
 
         $prepare->bindValue(1, $cryptPassword, PDO::PARAM_STR);
@@ -285,7 +285,7 @@ class AdminManager extends ManagerTable
     public function updateAdminStatus(int $idAdmin): bool
     {
 
-        $sql = "UPDATE admin SET status_admin= ? WHERE id_admin= ?; ";
+        $sql = "UPDATE monitoring_hungry_nuggets_admin SET status_admin= ? WHERE id_admin= ?; ";
         $prepare = $this->db->prepare($sql);
 
         $prepare->bindValue(1, 1, PDO::PARAM_INT);
@@ -311,7 +311,7 @@ class AdminManager extends ManagerTable
     public function updateAdminValidationStatus(string $admin, string $key): bool
     {
 
-        $sql = "UPDATE admin SET validation_status_admin= ? WHERE nickname_admin= ? AND confirmation_key_admin = ?; ";
+        $sql = "UPDATE monitoring_hungry_nuggets_admin SET validation_status_admin= ? WHERE nickname_admin= ? AND confirmation_key_admin = ?; ";
         $prepare = $this->db->prepare($sql);
 
         $prepare->bindValue(1, 1, PDO::PARAM_INT);
@@ -338,7 +338,7 @@ class AdminManager extends ManagerTable
     public function selectAllAdmin(): array
     {
 
-        $sql = "SELECT * FROM admin 
+        $sql = "SELECT * FROM monitoring_hungry_nuggets_admin 
                 ORDER BY status_admin ASC, 
                 validation_status_admin ASC;";
         $query = $this->db->query($sql);
@@ -357,7 +357,7 @@ class AdminManager extends ManagerTable
     public function selectOneAdmin(int $idAdmin): array
     {
 
-        $sql = "SELECT * FROM admin WHERE id_admin = ?";
+        $sql = "SELECT * FROM monitoring_hungry_nuggets_admin WHERE id_admin = ?";
         $prepare = $this->db->prepare($sql);
 
         try {
@@ -386,7 +386,7 @@ class AdminManager extends ManagerTable
     // PASSWORD VERIFY BY ADMIN
     public function adminPwdVerify(int $idAdmin, string $pwd) : bool {
 
-        $query = "SELECT * FROM admin WHERE id_admin = ? ;";
+        $query = "SELECT * FROM monitoring_hungry_nuggets_admin WHERE id_admin = ? ;";
         $req = $this->db->prepare($query);
         $req->bindValue(1, $idAdmin, PDO::PARAM_STR);
 

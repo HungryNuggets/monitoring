@@ -417,3 +417,43 @@ label {
     right: 9px;
     margin-right: -17px;
 }
+
+@media screen and (max-width: 625px) {
+    .main-container .form-container form {
+        padding:  0 25px;
+        height: auto;
+    }
+    .main-container .sign-in-container {
+        width: 100%;
+        z-index: 1;
+        margin: 50px auto;
+    }
+    .main-container .sign-up-container {
+        width: 100%;
+        z-index: 1;
+        opacity: 1;
+        margin: 50px auto;
+    }
+    .overlay-container {
+        display: none !important;
+    }
+    .main-container .form-container {
+        width: 100% !important;
+        position: static;
+        height: auto;
+    }
+    .main-container {
+        margin-bottom: 150px;
+        height: auto;
+    }
+    table {
+        font-size: 0.7em !important;
+    }
+    table th,
+    table td {
+        padding: 2px !important;
+    }
+    table th {
+        letter-spacing: 1px;
+    }
+}
