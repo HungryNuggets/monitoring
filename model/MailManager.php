@@ -67,7 +67,7 @@ class MailManager {
                             <img style="width: 80%;margin: 0 auto; text-align: center; display: flex;" src="'. $array['imgText'] .'" alt="new admin">
                            
                            <div style="margin: 0 auto;width: 68%; text-align: center;">
-                                <a href="https://monitoring.hungrynuggets.com/?issue" style="text-decoration: none;"><button style=" border-radius: 40px; border: 1px solid #F4CA34; background: #F4CA34; color: #fff; font-size: 1.1em; font-weight: 400; padding: 8px 45px; letter-spacing: 1px; text-transform: uppercase; margin-top:25px; font-family: \'Dosis\', \'Montserrat\',sans-serif;">GO</button></a>
+                                <a href="https://monitoring.hungrynuggets.com/?issue" style="text-decoration: none;"><button style=" border-radius: 40px; border: 1px solid #F4CA34; background-color: #F4CA34; color: #fff; font-size: 1.1em; font-weight: 400; padding: 8px 45px; letter-spacing: 1px; text-transform: uppercase; margin-top:25px; font-family: \'Dosis\', \'Montserrat\',sans-serif;">GO</button></a>
                             </div>
                             <img alt="Hungry Nuggets" src="' . $array['imgBottom'] . '" style="width: 40%; margin : 85px auto 100px auto;padding-bottom:100px;text-align: center; display: flex;">
                         </div>

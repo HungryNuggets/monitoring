@@ -23,7 +23,7 @@ if(isset($_POST['adminInfoUpdate'])){
         $inputVerify = $adminManager->verifyExistence($_POST['nickname_admin'],$_POST['mail_admin']);
 
         // IF LOGIN OR MAIL ALREADY USED
-        if($inputVerify > 0) {
+        if($inputVerify > 1) {
 
             $warningInfo = "Ce pseudo ou cette adresse mail sont déjà utilisé";
 

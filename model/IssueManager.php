@@ -64,9 +64,9 @@ class IssueManager extends ManagerTable {
 
     // SELECT ALL ISSUE (ORDER BY)
     public function selectAllIssue() : array {
-        $sql = "SELECT issue.*, customer.*, admin.nickname_admin FROM monitoring_hungry_nuggets_issue 
-                LEFT JOIN monitoring_hungry_nuggets_customer ON customer_id_customer = id_customer 
-                LEFT JOIN monitoring_hungry_nuggets_admin ON admin_id_admin = id_admin
+        $sql = "SELECT issue.*, customer.*, admin.nickname_admin FROM monitoring_hungry_nuggets_issue AS issue 
+                LEFT JOIN monitoring_hungry_nuggets_customer AS customer ON customer_id_customer = id_customer 
+                LEFT JOIN monitoring_hungry_nuggets_admin AS admin ON admin_id_admin = id_admin
                 ORDER BY status_issue DESC,
                 timestamp_issue DESC;";
         $query = $this->db->query($sql);
