@@ -374,19 +374,18 @@ label {
     right: 25px;
 }
 
-.monitoring-card div a {
+.monitoring-card div h2 a {
     text-decoration: none;
+    bottom: 0;
 }
 
-.monitoring-card div a h2 {
+.monitoring-card div h2 {
     font-size: 1.1em;
     font-weight: 500;
     letter-spacing: 1px;
     text-transform: uppercase;
     color: #0E101D;
     padding: 5px;
-    position: relative;
-    top: 155px;
 }
 
 .monitoring-card img {
@@ -400,11 +399,13 @@ label {
 .monitoring-card a {
     position: relative;
     bottom: 155px;
+    color: #15182B;
 }
 
 .monitoring-card p {
     text-align: left;
     margin: -5px auto 0 65px;
+    cursor: pointer;
 }
 
 .notification {
@@ -416,4 +417,50 @@ label {
     bottom:14px;
     right: 9px;
     margin-right: -17px;
+}
+
+@media screen and (max-width: 625px) {
+    .main-container .form-container form {
+        padding:  0 25px;
+        height: auto;
+    }
+    .main-container .sign-in-container {
+        width: 100%;
+        z-index: 1;
+        margin: 50px auto;
+    }
+    .main-container .sign-up-container {
+        width: 100%;
+        z-index: 1;
+        opacity: 1;
+        margin: 50px auto;
+    }
+    .overlay-container {
+        display: none !important;
+    }
+    .main-container .form-container {
+        width: 100% !important;
+        position: static;
+        height: auto;
+    }
+    .main-container {
+        margin-bottom: 150px;
+        height: auto;
+    }
+    table {
+        font-size: 0.7em !important;
+    }
+    table th,
+    table td {
+        padding: 2px !important;
+    }
+    table th {
+        letter-spacing: 1px;
+    }
+}
+
+@media screen and (max-width: 990px) {
+    .nav-item {
+        margin: 6px;
+    }
 }

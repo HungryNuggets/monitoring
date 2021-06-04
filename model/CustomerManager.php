@@ -10,7 +10,7 @@ class CustomerManager extends ManagerTable {
     public function newCustomer(Customer $customer): bool {
 
         // CUSTOMER INSERT
-        $sql = "INSERT INTO customer (name_customer, domain_customer, hosting_customer, contact_person_customer, mail_customer, phone_customer) VALUES (?,?,?,?,?,?)";
+        $sql = "INSERT INTO monitoring_hungry_nuggets_customer (name_customer, domain_customer, hosting_customer, contact_person_customer, mail_customer, phone_customer) VALUES (?,?,?,?,?,?)";
         $prepare = $this->db->prepare($sql);
 
         try {
@@ -38,7 +38,7 @@ class CustomerManager extends ManagerTable {
 
     function updateCustomer(Customer $customer, int $idCustomer) : bool {
 
-        $sql = "UPDATE customer SET name_customer= ?, domain_customer= ?, hosting_customer = ?, contact_person_customer= ?, mail_customer= ?, phone_customer= ? WHERE id_customer=?; ";
+        $sql = "UPDATE monitoring_hungry_nuggets_customer SET name_customer= ?, domain_customer= ?, hosting_customer = ?, contact_person_customer= ?, mail_customer= ?, phone_customer= ? WHERE id_customer=?; ";
         $prepare = $this->db->prepare($sql);
 
         $prepare->bindValue(1, $customer->getNameCustomer(), PDO::PARAM_STR);
@@ -68,7 +68,7 @@ class CustomerManager extends ManagerTable {
     // SELECT ALL CUSTOMERS
     public function selectAllCustomers(): array {
 
-        $sql = "SELECT * FROM customer ORDER BY name_customer ASC;";
+        $sql = "SELECT * FROM monitoring_hungry_nuggets_customer ORDER BY name_customer ASC;";
         $query = $this->db->query($sql);
 
         // IF THERE IS AT LEAST 1 RESULT
@@ -82,7 +82,7 @@ class CustomerManager extends ManagerTable {
 
     // SELECT ONE CUSTOMER
     public function selectOneCustomer(int $idCustomer): array {
-        $sql = "SELECT * FROM customer WHERE id_customer = ?";
+        $sql = "SELECT * FROM monitoring_hungry_nuggets_customer WHERE id_customer = ?";
         $prepare = $this->db->prepare($sql);
 
         try {
@@ -111,10 +111,10 @@ class CustomerManager extends ManagerTable {
     public function deleteCustomer(int $idCustomer) : bool {
 
         // PREPARE DELETION FOR ISSUES
-        $sqlIssue = "DELETE FROM issue WHERE customer_id_customer= ?";
+        $sqlIssue = "DELETE FROM monitoring_hungry_nuggets_issue WHERE customer_id_customer= ?";
         $prepareIssue = $this->db->prepare($sqlIssue);
         // PREPARE DELETION FOR CUSTOMER
-        $sqlCustomer = "DELETE FROM customer WHERE id_customer= ?";
+        $sqlCustomer = "DELETE FROM monitoring_hungry_nuggets_customer WHERE id_customer= ?";
         $prepareCustomer = $this->db->prepare($sqlCustomer);
 
         try {
