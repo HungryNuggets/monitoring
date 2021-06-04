@@ -95,51 +95,62 @@ if (isset($_POST['signup'])) {
 // EMAIL CONFIRMATION
     if (isset($_GET['registration'])) {
 
-        // UPDATE OF THE REGISTRATION STATUS
-        $registration = $adminManager->updateAdminValidationStatus($_GET['user'], $_GET['key']);
+        $alreadyUpdated = $adminManager->selectOneAdminByName($_GET['user']);
 
-        if ($registration){
+        if ($alreadyUpdated['validation_status_admin'] == 1) {
 
-            $admin = "no";
-            $admins = $adminManager->selectValidatedAdmins();
-            $adminList= [];
-            foreach ($admins as $admin) {
-                $adminList[] = $admin['mail_admin'];
-            }
+            // WARNING
+            $warningSignIn = "Hello " . $_GET['user'] . " ! Tu as déjà validé ton adresse e-mail, un administrateur est en train d'étudier ta demande :)";
 
-            // MAIL FOR CONFIRMATION
-            $mailRegistration = new Swift_Mailer($transport);
-            $messageRegistration = (new Swift_Message('Nouveau compte en attente de validation'))
-                ->setFrom([MAIL_ADDRESS => 'Hungry Nuggets'])
-                ->setTo($adminList);
+        } else {
 
-            // IMAGES
-            $imageMain = $messageRegistration->embed(Swift_Image::fromPath('img/mails/entete-mail.jpg'));
-            $imageText = $messageRegistration->embed(Swift_Image::fromPath('img/mails/new-user.png'));
-            $imageFooter = $messageRegistration->embed(Swift_Image::fromPath('img/mails/bottom-mail.png'));
+            // UPDATE OF THE REGISTRATION STATUS
+            $registration = $adminManager->updateAdminValidationStatus($_GET['user'], $_GET['key']);
 
-            // SET MAIL BODY
-            $messageRegistration->setBody(
-                MailManager::mailGeneric(["imgTop"=>$imageMain,"imgText"=>$imageText,"imgBottom"=>$imageFooter]),
-                'text/html'
-            );
+            if ($registration){
 
-            if ($mailRegistration->send($messageRegistration)){
+                $admin = "no";
+                $admins = $adminManager->selectValidatedAdmins();
+                $adminList= [];
+                foreach ($admins as $admin) {
+                    $adminList[] = $admin['mail_admin'];
+                }
 
-                // WARNING
-                $warningSignIn = "Hello " . $_GET['user'] . " ! Tu as bien validé ton adresse e-mail, un administrateur va étudier ta demande !";
+                // MAIL FOR CONFIRMATION
+                $mailRegistration = new Swift_Mailer($transport);
+                $messageRegistration = (new Swift_Message('Nouveau compte en attente de validation'))
+                    ->setFrom([MAIL_ADDRESS => 'Hungry Nuggets'])
+                    ->setTo($adminList);
+
+                // IMAGES
+                $imageMain = $messageRegistration->embed(Swift_Image::fromPath('img/mails/entete-mail.jpg'));
+                $imageText = $messageRegistration->embed(Swift_Image::fromPath('img/mails/new-user.png'));
+                $imageFooter = $messageRegistration->embed(Swift_Image::fromPath('img/mails/bottom-mail.png'));
+
+                // SET MAIL BODY
+                $messageRegistration->setBody(
+                    MailManager::mailGeneric(["imgTop"=>$imageMain,"imgText"=>$imageText,"imgBottom"=>$imageFooter]),
+                    'text/html'
+                );
+
+                if ($mailRegistration->send($messageRegistration)){
+
+                    // WARNING
+                    $warningSignIn = "Hello " . $_GET['user'] . " ! Tu as bien validé ton adresse e-mail, un administrateur va étudier ta demande !";
+
+                } else {
+
+                    // WARNING
+                    $warningSignIn = "Désolé " . $_GET['user'] . ", mais nous avons eu un soucis";
+
+                }
 
             } else {
 
                 // WARNING
-                $warningSignUp = "Désolé " . $_GET['user'] . ", mais nous avons eu un soucis";
+                $warningSignIn = "Hello ".$_GET['user'].", pourrais-tu réessayer ?";
 
             }
-
-        } else {
-
-            // WARNING
-            $warningSignIn = "Hello ".$_GET['user'].", pourrais-tu réessayer ?";
 
         }
     }
