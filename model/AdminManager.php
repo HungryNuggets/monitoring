@@ -408,4 +408,34 @@ class AdminManager extends ManagerTable
             return $e->getMessage();
         }
     }
+
+    // SELECT ONE ADMIN BY NAME
+    public function selectOneAdminByName(string $nameAdmin): array
+    {
+
+        $sql = "SELECT * FROM monitoring_hungry_nuggets_admin WHERE nickname_admin = ?";
+        $prepare = $this->db->prepare($sql);
+
+        try {
+
+            $prepare->execute([$nameAdmin]);
+
+            // IF THERE IS A RESULT
+            if ($prepare->rowCount()) {
+
+                return $prepare->fetch(PDO::FETCH_ASSOC);
+
+                // IF NOT
+            } else {
+                return [];
+            }
+
+        } catch (Exception $e) {
+
+            trigger_error($e->getMessage());
+            // IF NOT
+            return [];
+
+        }
+    }
 }

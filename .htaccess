@@ -1,0 +1,5 @@
+DirectoryIndex public/index.php
+
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://monitoring.hungrynuggets.com/public/ [R,L]
